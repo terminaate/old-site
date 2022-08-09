@@ -6,14 +6,15 @@
     border: none;
     outline: none;
     box-sizing: border-box;
+
 }
 
 :root {
-    --background-primary: #111010;
+    --background-primary: #0b0b0b;
     --backogrund-secondary: #1d1c1c;
-    --background-darked: rgba(0, 0, 0, .6);
+    --background-darked: rgba(0, 0, 0, .3);
     --text-primary: #c9bfbf;
-    --text-secondary: rgba(201, 191, 191, .6);
+    --text-secondary: rgba(201, 191, 191, 0.18);
     --font-primary: 'Source Code Pro', monospace;
     --font-logo: 'Libre Barcode 39 Text', cursive;
 }

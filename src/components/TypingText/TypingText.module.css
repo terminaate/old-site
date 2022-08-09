@@ -3,21 +3,28 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
 }
 
 .typingTextContainer span {
-    animation: typingTextAnimation 0.5s both;
+    animation: typingTextAnimation 0.7s both;
 }
 
 @keyframes typingTextAnimation {
-    from {
+    0% {
         opacity: 0;
         transform: translateX(-15px);
     }
-    to {
+    50% {
+        text-shadow: 0 0 30px var(--text-primary);
+    }
+    75% {
+        text-shadow: 0 0 5px var(--text-primary);
+    }
+    100% {
         opacity: 1;
         transform: translateX(0);
+        text-shadow: none;
     }
 }
