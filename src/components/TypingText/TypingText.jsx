@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import cl from "./TypingText.module.css"
 
-const TypingText = ({text, defaultDelay = 300}) => {
+const TypingText = ({text, defaultDelay = 300, className, onClick}) => {
     const [renderedWords, setRenderedWords] = useState([]);
 
 
@@ -32,7 +32,7 @@ const TypingText = ({text, defaultDelay = 300}) => {
     return (
         <div className={cl.typingTextContainer}>
             {renderedWords.map((obj, key) => (
-                <span key={key}>{obj}</span>
+                <span onClick={onClick} className={className} key={key}>{obj}</span>
             ))}
         </div>
     );

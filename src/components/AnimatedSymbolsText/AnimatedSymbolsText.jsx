@@ -3,9 +3,7 @@ import cl from "./AnimatedSymbolsText.module.css"
 
 const AnimatedSymbolsText = () => {
     return (
-        <div className={cl.anim}>
-
-        </div>
+        <span></span>
     );
 };
 

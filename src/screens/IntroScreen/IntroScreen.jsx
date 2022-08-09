@@ -1,24 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import cl from "./IntroScreen.module.css";
 import TypingText from "../../components/TypingText/TypingText";
-import Particles from "../../components/Particles/Particles";
+// import Particles from "../../components/Particles/Particles";
 
 const IntroScreen = () => {
     const [backgroundState, setBackgroundState] = useState("loading");
+    const visited = useRef(Boolean(localStorage.getItem("visited")));
 
     useEffect(() => {
-        document.body.onload = () => {
-            setTimeout(() => setBackgroundState("loaded"), 1000)
+        setBackgroundState("loaded")
+
+        if (!localStorage.getItem("visited")) {
+            localStorage.setItem("visited", "true")
         }
     }, [])
 
     return (
-        <div onClick={() => setBackgroundState("clicked")} className={cl.introScreen} data-background={backgroundState}>
-            <div className={cl.introScreenBackground}>
-                <Particles/>
-            </div>
-            <div className={cl.introScreenContainer}>
-                <TypingText text={["Hello", "mother", "fucking", "world", "world", "world", "world", "world", "world", "world", "world", "world", "world", "world", ]}/>
+        <div className={cl.introScreen} data-background={backgroundState}>
+            {/*<div className={cl.introScreenBackground}>*/}
+            {/*    <Particles/>*/}
+            {/*    HERE SOMETHING IN BACKGROUND*/}
+            {/*</div>*/}
+            <div className={cl.introScreenForeground}>
+                <TypingText onClick={e => e.target.style.background = "none"}
+                            className={visited.current ? cl.introTypingVisitedText : ""}
+                            text={"A programmer is a person who writes code and compiles it himself into an executable file, so we are all \"script kiddy\", remember that bitches)"}/>
+                <div onClick={() => backgroundState === "loaded" ? setBackgroundState("clicked") : ""}
+                     className={cl.introSkipButton}>
+                    <span>-</span>
+                    <span>{visited.current ? "skip" : "shut up 14yo \"programmer\""}</span>
+                </div>
             </div>
         </div>
     );

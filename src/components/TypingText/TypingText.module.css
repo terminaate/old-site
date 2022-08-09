@@ -9,6 +9,7 @@
 
 .typingTextContainer span {
     animation: typingTextAnimation 0.7s both;
+    font-size: 16px;
 }
 
 @keyframes typingTextAnimation {
