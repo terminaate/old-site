@@ -1,0 +1,23 @@
+.typingTextContainer {
+    display: flex;
+    align-items: center;
+    justify-content: inherit;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+}
+
+.typingTextContainer span {
+    animation: typingTextAnimation 0.5s both;
+}
+
+@keyframes typingTextAnimation {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

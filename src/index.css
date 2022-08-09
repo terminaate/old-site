@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&family=Source+Code+Pro:wght@400;500;600;700&display=swap');
+
+*, *:after, *:before {
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-primary: #111010;
+    --backogrund-secondary: #1d1c1c;
+    --background-darked: rgba(0, 0, 0, .6);
+    --text-primary: #c9bfbf;
+    --text-secondary: rgba(201, 191, 191, .6);
+    --font-primary: 'Source Code Pro', monospace;
+    --font-logo: 'Libre Barcode 39 Text', cursive;
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+}
