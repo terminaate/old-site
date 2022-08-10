@@ -10,9 +10,18 @@ const Particles = ({
 									 }) => {
 	const canvasRef = useRef(null);
 
+	const getParticlesSize = () => {
+		if (particlesSize < 1.2) {
+			particlesSize = Math.random() * 2
+			getParticlesSize()
+		}
+
+		return particlesSize
+	}
+
 	const [config, setConfig] = useState({
 		backgroundColor,
-		particlesSize: particlesSize > 1 ? particlesSize : Math.random() * 2,
+		particlesSize: getParticlesSize(),
 		particlesCount,
 		particlesColor,
 		particlesVelocity

@@ -7,8 +7,8 @@ const MainScreen = ({ isIntroEnded }) => {
 
 	return (
 		<div className={cl.mainScreen}>
-			<AnimatedSymbolsText>
-				HELLO MY FUCKING WORLD
+			<AnimatedSymbolsText className={cl.logo} infinite={true}>
+				Terminaate
 			</AnimatedSymbolsText>
 		</div>
 	);

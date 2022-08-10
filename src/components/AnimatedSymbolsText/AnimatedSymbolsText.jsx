@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const AnimatedSymbolsText = ({ className, delay = 200, infinite = false, children }) => {
+const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinite = false, children }) => {
 	const [text, setText] = useState([...children]);
 	const [animate, setAnimate] = useState(false);
 
@@ -31,7 +31,7 @@ const AnimatedSymbolsText = ({ className, delay = 200, infinite = false, childre
 				if (i === text.length-1 && infinite) {
 					setAnimate(false)
 				}
-			}, (delay + 50) * i);
+			}, (delay + clearDelay) * i);
 		}
 	};
 
