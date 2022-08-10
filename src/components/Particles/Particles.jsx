@@ -44,7 +44,6 @@ const Particles = ({
 				if (this.y < 0) {
 					this.y = ctx.canvas.height - this.y;
 				}
-				console.log(this.y, ctx.canvas.height);
 			};
 
 			this.reDraw = () => {
