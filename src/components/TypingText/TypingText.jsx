@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import cl from './TypingText.module.css';
+import AnimatedSymbolsText from '../AnimatedSymbolsText/AnimatedSymbolsText';
 
-const TypingText = ({ text, defaultDelay = 300, className, onClick }) => {
+const TypingText = ({ text, defaultDelay = 300, className, onClick, animatedSymbols = false }) => {
 	const [renderedWords, setRenderedWords] = useState([]);
-
 
 	useEffect(() => {
 		if (typeof text === 'string') {
@@ -32,7 +32,11 @@ const TypingText = ({ text, defaultDelay = 300, className, onClick }) => {
 	return (
 		<div className={cl.typingTextContainer}>
 			{renderedWords.map((obj, key) => (
-				<span onClick={onClick} className={className} key={key}>{obj}</span>
+				<>
+					{
+						animatedSymbols ? <AnimatedSymbolsText onClick={onClick} className={className}>{obj}</AnimatedSymbolsText> : <span onClick={onClick} className={className} key={key}>{obj}</span>
+					}
+				</>
 			))}
 		</div>
 	);

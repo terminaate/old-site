@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import cl from './IntroScreen.module.css';
 import TypingText from '../../components/TypingText/TypingText';
 import Particles from '../../components/Particles/Particles';
-// import Particles from "../../components/Particles/Particles";
 
-const IntroScreen = ({ setIsIntroEnded }) => {
-	const [backgroundState, setBackgroundState] = useState('loading');
+const IntroScreen = ({ setIsIntroEnded, isIntroEnded }) => {
 	const visited = useRef(Boolean(localStorage.getItem('visited')));
 	const containerRef = useRef(null);
 	const backgroundRef = useRef(null);
@@ -17,19 +15,18 @@ const IntroScreen = ({ setIsIntroEnded }) => {
 	}, []);
 
 	const skipButtonClickHandler = () => {
-		setBackgroundState('clicked');
 		setIsIntroEnded(true);
 	};
 
 	const onMouseMoveEventHandler = (e) => {
 		containerRef.current.style.transform = `translate(${(window.innerWidth - e.pageX * 2) / 90}px, ${(window.innerHeight - e.pageY * 2) / 90}px)`;
-		backgroundRef.current.style.transform = `translate(${(window.innerHeight - e.pageY * 2) / 90}px, ${(window.innerHeight - e.pageY * 2) / 90}px)`;
+		backgroundRef.current.style.transform = `translate(${(window.innerHeight - e.pageY * 2) / 90}px, ${(window.innerWidth - e.pageX * 2) / 90}px)`;
 	};
 
 	addEventListener('mousemove', onMouseMoveEventHandler);
 
 	return (
-		<div className={cl.introScreen} data-background={backgroundState}>
+		<div className={cl.introScreen} data-intro={isIntroEnded}>
 			<div ref={backgroundRef} className={cl.introScreenBackground}>
 				<Particles />
 			</div>
@@ -38,7 +35,7 @@ const IntroScreen = ({ setIsIntroEnded }) => {
 					<TypingText onClick={e => e.target.style.background = 'none'}
 											className={visited.current ? cl.introTypingVisitedText : ''}
 											text={'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy", remember that bitches)'} />
-					<div onClick={skipButtonClickHandler}
+					<div data-intro={isIntroEnded} onClick={skipButtonClickHandler}
 							 className={cl.introSkipButton}>
 						<span>-</span>
 						<span>{visited.current ? 'skip' : 'shut up 14yo "programmer"'}</span>

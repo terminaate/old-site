@@ -7,8 +7,8 @@ const App = () => {
 
 	return (
 		<>
-			<IntroScreen setIsIntroEnded={setIsIntroEnded} />
-			<MainScreen isIntroEnded={isIntroEnded} />
+			<IntroScreen isIntroEnded={isIntroEnded} setIsIntroEnded={setIsIntroEnded} />
+			{isIntroEnded && <MainScreen isIntroEnded={isIntroEnded} />}
 		</>
 	);
 };

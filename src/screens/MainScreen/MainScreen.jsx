@@ -1,13 +1,15 @@
 import React from 'react';
 import TypingText from '../../components/TypingText/TypingText';
+import cl from "./MainScreen.module.css";
+import AnimatedSymbolsText from '../../components/AnimatedSymbolsText/AnimatedSymbolsText';
 
 const MainScreen = ({ isIntroEnded }) => {
 
 	return (
-		<div>
-			{ isIntroEnded && (
-				<TypingText text={"THIS IS A FUCKING MAIN CONTENT"}/>
-			)}
+		<div className={cl.mainScreen}>
+			<AnimatedSymbolsText>
+				HELLO MY FUCKING WORLD
+			</AnimatedSymbolsText>
 		</div>
 	);
 };

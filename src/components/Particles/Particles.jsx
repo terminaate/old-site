@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.css';
 
 const Particles = ({
-										 backgroundColor = '#000',
+										 backgroundColor = '#0b0b0b',
 										 particlesCount = 100,
 										 particlesSize = Math.random() * 2,
 										 particlesColor = '#fff',
@@ -12,7 +12,7 @@ const Particles = ({
 
 	const [config, setConfig] = useState({
 		backgroundColor,
-		particlesSize: particlesSize > 0.5 ? particlesSize : Math.random() * 2,
+		particlesSize: particlesSize > 1 ? particlesSize : Math.random() * 2,
 		particlesCount,
 		particlesColor,
 		particlesVelocity
@@ -22,7 +22,7 @@ const Particles = ({
 		const ctx = canvasRef.current.getContext('2d');
 		ctx.canvas.width = innerWidth;
 		ctx.canvas.height = innerHeight;
-		let particles = [];
+		const particles = [];
 
 		init();
 
