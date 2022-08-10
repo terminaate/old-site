@@ -1,41 +1,93 @@
-import React, {useEffect, useRef} from 'react';
-import cl from "./Particles.module.css"
+import React, { useEffect, useRef, useState } from 'react';
+import cl from './Particles.module.css';
 
-const Particles = () => {
-    const canvasRef = useRef(null);
+const Particles = ({
+										 backgroundColor = '#000',
+										 particlesCount = 100,
+										 particlesSize = Math.random() * 2,
+										 particlesColor = '#fff',
+										 particlesVelocity = 0.4
+									 }) => {
+	const canvasRef = useRef(null);
 
-    const draw = (ctx) => {
-        const drawCircle = (x=Math.random() * ctx.canvas.width, y=ctx.canvas.height, radius = Math.floor(Math.random() * 7)) => {
-            ctx.fillStyle = "#fff";
-            ctx.beginPath()
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill()
-        }
+	const [config, setConfig] = useState({
+		backgroundColor,
+		particlesSize: particlesSize > 0.5 ? particlesSize : Math.random() * 2,
+		particlesCount,
+		particlesColor,
+		particlesVelocity
+	});
 
-        for (let i = 0; i < 101; i++) {
-            drawCircle();
-        }
-    }
+	useEffect(() => {
+		const ctx = canvasRef.current.getContext('2d');
+		ctx.canvas.width = innerWidth;
+		ctx.canvas.height = innerHeight;
+		let particles = [];
 
-    useEffect(() => {
-        const ctx = canvasRef.current.getContext("2d");
-        ctx.canvas.width = window.innerWidth;
-        ctx.canvas.height = window.innerHeight;
+		init();
 
-        window.onresize = (e) => {
-            ctx.canvas.width = window.innerWidth;
-            ctx.canvas.height = window.innerHeight;
-            draw(ctx)
-        }
+		window.onresize = () => {
+			ctx.canvas.width = innerWidth;
+			ctx.canvas.height = innerHeight;
+		};
 
-        draw(ctx);
-    }, [])
+		function Particle() {
+			this.x = Math.random() * ctx.canvas.width;
+			this.y = Math.random() * ctx.canvas.height;
+			this.velocityX = Math.random() * (config.particlesVelocity * 2) - config.particlesVelocity;
+			this.velocityY = Math.random() * (config.particlesVelocity * 2) + config.particlesVelocity;
 
-    return (
-        <div className={cl.particlesContainer}>
-            <canvas ref={canvasRef}/>
-        </div>
-    );
+			this.position = () => {
+				this.x += this.velocityX;
+
+				this.y -= this.velocityY;
+				if (this.y < 0) {
+					this.y = ctx.canvas.height - this.y;
+				}
+				console.log(this.y, ctx.canvas.height);
+			};
+
+			this.reDraw = () => {
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, config.particlesSize, 0, Math.PI * 2);
+				ctx.closePath();
+				ctx.fillStyle = config.particlesColor;
+				ctx.fill();
+			};
+		}
+
+		function drawBackground() {
+			ctx.fillStyle = config.backgroundColor;
+			ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+		}
+
+		function drawParticles() {
+			for (const particle of particles) {
+				particle.position();
+				particle.reDraw();
+			}
+		}
+
+		function loop() {
+			drawBackground();
+			drawParticles();
+			requestAnimationFrame(loop);
+		}
+
+		function init() {
+			for (let i = 0; i < config.particlesCount; i++) {
+				particles.push(new Particle);
+			}
+
+			loop();
+		}
+	}, []);
+
+	return (
+		<div className={cl.particlesContainer}>
+			<canvas ref={canvasRef} />
+		</div>
+	);
 };
 
 export default Particles;

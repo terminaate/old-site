@@ -16,16 +16,24 @@
     pointer-events: none;
 }
 
-.introScreenForeground {
-    width: 30%;
-    min-width: 100px;
-}
-
+.introScreenForeground,
 .introScreenBackground {
     position: absolute;
     width: 100%;
     height: 100%;
-    /*z-index: -10;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.introScreenBackground {
+    z-index: -10;
+}
+
+.introScreenContainer {
+    width: 30%;
+    min-width: 100px;
 }
 
 .introTypingVisitedText {

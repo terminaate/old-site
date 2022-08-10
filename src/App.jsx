@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
-import IntroScreen from "./screens/IntroScreen/IntroScreen";
-import MainScreen from "./screens/MainScreen/MainScreen";
+import React, { useState } from 'react';
+import IntroScreen from './screens/IntroScreen/IntroScreen';
+import MainScreen from './screens/MainScreen/MainScreen';
 
 const App = () => {
-    return (
-        <>
-            <IntroScreen/>
-            <MainScreen/>
-        </>
-    );
+	const [isIntroEnded, setIsIntroEnded] = useState(false);
+
+	return (
+		<>
+			<IntroScreen setIsIntroEnded={setIsIntroEnded} />
+			<MainScreen isIntroEnded={isIntroEnded} />
+		</>
+	);
 };
 
 export default App;
