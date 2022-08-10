@@ -12,12 +12,12 @@ const Particles = ({
 
 	const getParticlesSize = () => {
 		if (particlesSize < 1.2) {
-			particlesSize = Math.random() * 2
-			getParticlesSize()
+			particlesSize = Math.random() * 2;
+			getParticlesSize();
 		}
 
-		return particlesSize
-	}
+		return particlesSize;
+	};
 
 	const [config, setConfig] = useState({
 		backgroundColor,
@@ -32,6 +32,7 @@ const Particles = ({
 		ctx.canvas.width = innerWidth;
 		ctx.canvas.height = innerHeight;
 		const particles = [];
+		let animationRequestFrameId;
 
 		init();
 
@@ -79,16 +80,17 @@ const Particles = ({
 		function loop() {
 			drawBackground();
 			drawParticles();
-			requestAnimationFrame(loop);
+			animationRequestFrameId = requestAnimationFrame(loop);
 		}
 
 		function init() {
 			for (let i = 0; i < config.particlesCount; i++) {
 				particles.push(new Particle);
 			}
-
 			loop();
 		}
+
+		return () => cancelAnimationFrame(animationRequestFrameId);
 	}, []);
 
 	return (

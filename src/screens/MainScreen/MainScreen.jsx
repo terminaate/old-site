@@ -1,15 +1,19 @@
-import React from 'react';
-import TypingText from '../../components/TypingText/TypingText';
-import cl from "./MainScreen.module.css";
+import React, { useState } from 'react';
+import cl from './MainScreen.module.css';
 import AnimatedSymbolsText from '../../components/AnimatedSymbolsText/AnimatedSymbolsText';
+import Modal from '../../components/Modal/Modal';
 
-const MainScreen = ({ isIntroEnded }) => {
+const MainScreen = () => {
+	const [modal, setModal] = useState(false);
 
 	return (
-		<div className={cl.mainScreen}>
+		<div onClick={() => setModal(true)} className={cl.mainScreen}>
 			<AnimatedSymbolsText className={cl.logo} infinite={true}>
 				Terminaate
 			</AnimatedSymbolsText>
+			<Modal modal={modal} setModal={setModal}>
+				Hello world
+			</Modal>
 		</div>
 	);
 };

@@ -8,7 +8,7 @@
     flex-direction: column;
     z-index: 100;
     background-color: var(--background-primary);
-    transition: background-color .4s ease-in, opacity .4s ease-in;
+    transition: opacity .4s ease-in;
 }
 
 .introScreen[data-intro="true"] {

@@ -1,0 +1,23 @@
+.modalScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--background-darked);
+    backdrop-filter: blur(10px);
+    transition: .3s ease-in;
+}
+
+.modalScreen[data-modal="false"] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modalContent {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--background-primary);
+}
