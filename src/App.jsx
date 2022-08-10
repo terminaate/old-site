@@ -3,7 +3,7 @@ import IntroScreen from './screens/IntroScreen/IntroScreen';
 import MainScreen from './screens/MainScreen/MainScreen';
 
 const App = () => {
-	const [isIntroEnded, setIsIntroEnded] = useState(true);
+	const [isIntroEnded, setIsIntroEnded] = useState(false);
 
 	return (
 		<>

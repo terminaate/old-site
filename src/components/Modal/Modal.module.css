@@ -9,6 +9,7 @@
     background-color: var(--background-darked);
     backdrop-filter: blur(10px);
     transition: .3s ease-in;
+    z-index: 50;
 }
 
 .modalScreen[data-modal="false"] {
