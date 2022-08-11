@@ -8,4 +8,5 @@
     border: 1px solid var(--text-primary);
     color: var(--text-primary);
     backdrop-filter: blur(10px);
+    width: max-content;
 }
