@@ -34,7 +34,8 @@ const TypingText = ({ text, defaultDelay = 300, className, onClick, animatedSymb
 			{renderedWords.map((obj, key) => (
 				<>
 					{
-						animatedSymbols ? <AnimatedSymbolsText onClick={onClick} className={className}>{obj}</AnimatedSymbolsText> : <span onClick={onClick} className={className} key={key}>{obj}</span>
+						animatedSymbols ? <AnimatedSymbolsText onClick={onClick} className={className}>{obj}</AnimatedSymbolsText> :
+							<span onClick={onClick} className={className} key={key}>{obj}</span>
 					}
 				</>
 			))}

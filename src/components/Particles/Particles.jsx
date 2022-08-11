@@ -19,7 +19,7 @@ const Particles = ({
 		return particlesSize;
 	};
 
-	const [config, setConfig] = useState({
+	const [config] = useState({
 		backgroundColor,
 		particlesSize: getParticlesSize(),
 		particlesCount,

@@ -1,0 +1,11 @@
+.modalContent {
+    padding: 20px;
+    border-radius: 5px;
+    /*background-color: var(--background-primary);*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+}

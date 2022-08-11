@@ -3,7 +3,7 @@ import cl from './IntroScreen.module.css';
 import TypingText from '../../components/TypingText/TypingText';
 import Particles from '../../components/Particles/Particles';
 
-const IntroScreen = ({ setIsIntroEnded }) => {
+const IntroScreen = ({ setIntro }) => {
 	const [introEnded, setIntroEnded] = useState(false);
 	const visited = useRef(Boolean(localStorage.getItem('visited')));
 	const containerRef = useRef(null);
@@ -13,19 +13,21 @@ const IntroScreen = ({ setIsIntroEnded }) => {
 		if (!localStorage.getItem('visited')) {
 			localStorage.setItem('visited', 'true');
 		}
+
+		addEventListener('mousemove', onMouseMoveEventHandler);
+
+		return () => removeEventListener('mousemove', onMouseMoveEventHandler);
 	}, []);
 
 	const skipButtonClickHandler = () => {
 		setIntroEnded(true);
-		setTimeout(() => setIsIntroEnded(true), 500);
+		setTimeout(() => setIntro(false), 500);
 	};
 
 	const onMouseMoveEventHandler = (e) => {
 		containerRef.current.style.transform = `translate(${(window.innerWidth - e.pageX * 1.4) / 90}px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
 		backgroundRef.current.style.transform = `translate(${(window.innerHeight - e.pageY * 1.4) / 90}px, ${(window.innerWidth - e.pageX * 1.4) / 90}px)`;
 	};
-
-	addEventListener('mousemove', onMouseMoveEventHandler);
 
 	return (
 		<div className={cl.introScreen} data-intro={introEnded}>

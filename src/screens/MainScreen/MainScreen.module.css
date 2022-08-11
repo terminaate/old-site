@@ -9,6 +9,7 @@
     flex-direction: column;
     background-color: var(--background-primary);
     animation: opacityAnim .4s both ease-in;
+    overflow-x: hidden;
 }
 
 @keyframes opacityAnim {

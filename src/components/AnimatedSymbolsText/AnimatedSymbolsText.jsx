@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinite = false, children }) => {
+const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinite = false, children, ...props }) => {
 	const [text, setText] = useState([...children]);
 	const [animate, setAnimate] = useState(false);
 
@@ -41,7 +41,7 @@ const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinit
 	}, [animate]);
 
 	return (
-		<span className={className}>
+		<span className={className} {...props}>
 			{text.join('')}
 		</span>
 	);
