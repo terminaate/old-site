@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import cl from './MainScreen.module.css';
 import AnimatedSymbolsText from '../../components/AnimatedSymbolsText/AnimatedSymbolsText';
-import githubImg from '../../assets/img/github.svg';
-import discordImg from '../../assets/img/discord.svg';
+import githubImg from '../../assets/svg/github.svg';
+import discordImg from '../../assets/svg/discord.svg';
 import Particles from '../../components/Particles/Particles';
 
 const MainScreen = () => {
