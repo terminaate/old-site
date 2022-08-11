@@ -21,8 +21,39 @@
     }
 }
 
+.logoContainer {
+    position: relative;
+}
+
+.logoParticles {
+    position: absolute;
+    z-index: -10;
+}
+
 .logo {
     font-weight: 400;
     font-family: var(--font-logo);
     font-size: 40px;
+    text-shadow: 0 0 10px var(--text-primary);
+}
+
+.socials {
+    position: absolute;
+    bottom: 2rem;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.socials button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.socials button:hover {
+    transform: translateY(-7px);
 }

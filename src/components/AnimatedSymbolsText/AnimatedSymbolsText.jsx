@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinite = false, children, ...props }) => {
+const AnimatedSymbolsText = ({ className, delay = 200, clearDelay = delay, infinite = false, children }) => {
 	const [text, setText] = useState([...children]);
 	const [animate, setAnimate] = useState(false);
 
@@ -19,7 +19,7 @@ const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinit
 	};
 
 	const animation = () => {
-		setAnimate(true)
+		setAnimate(true);
 		let oldText = [...text];
 
 		for (let i = 0; i < text.length; i++) {
@@ -28,8 +28,8 @@ const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinit
 			}, delay * i);
 			setTimeout(() => {
 				updateSymbol(i, oldText[i]);
-				if (i === text.length-1 && infinite) {
-					setAnimate(false)
+				if (i === text.length - 1 && infinite) {
+					setAnimate(false);
 				}
 			}, (delay + clearDelay) * i);
 		}
@@ -41,7 +41,7 @@ const AnimatedSymbolsText = ({ className, delay = 200, clearDelay=delay, infinit
 	}, [animate]);
 
 	return (
-		<span className={className} {...props}>
+		<span className={className}>
 			{text.join('')}
 		</span>
 	);

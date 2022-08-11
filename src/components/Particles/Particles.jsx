@@ -1,14 +1,56 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.css';
+import classes from '../../hooks/classes';
 
 const Particles = ({
 										 backgroundColor = '#0b0b0b',
 										 particlesCount = 100,
 										 particlesSize = Math.random() * 2,
 										 particlesColor = '#fff',
-										 particlesVelocity = 0.4
+										 particlesVelocity = 0.4,
+										 className,
+										 height = '100%',
+										 width = '100%'
 									 }) => {
 	const canvasRef = useRef(null);
+
+	const getHeight = () => {
+		if (typeof height === 'number') {
+			return height;
+		}
+
+		if (height === '100%') {
+			return innerHeight;
+		}
+
+		let heightString = '';
+		for (const i of height) {
+			if (Number(i)) {
+				heightString += i;
+			}
+		}
+
+		return Number(heightString);
+	};
+
+	const getWidth = () => {
+		if (typeof width === 'number') {
+			return width;
+		}
+
+		if (width === '100%') {
+			return innerWidth;
+		}
+
+		let widthString = '';
+		for (const i of width) {
+			if (Number(i)) {
+				widthString += i;
+			}
+		}
+
+		return Number(widthString);
+	};
 
 	const getParticlesSize = () => {
 		if (particlesSize < 1.2) {
@@ -29,16 +71,16 @@ const Particles = ({
 
 	useEffect(() => {
 		const ctx = canvasRef.current.getContext('2d');
-		ctx.canvas.width = innerWidth;
-		ctx.canvas.height = innerHeight;
+		ctx.canvas.width = getWidth();
+		ctx.canvas.height = getHeight();
 		const particles = [];
 		let animationRequestFrameId;
 
 		init();
 
 		window.onresize = () => {
-			ctx.canvas.width = innerWidth;
-			ctx.canvas.height = innerHeight;
+			ctx.canvas.width = getWidth();
+			ctx.canvas.height = getHeight();
 		};
 
 		function Particle() {
@@ -94,7 +136,7 @@ const Particles = ({
 	}, []);
 
 	return (
-		<div className={cl.particlesContainer}>
+		<div style={{ height, width }} className={classes(cl.particlesContainer, className)}>
 			<canvas ref={canvasRef} />
 		</div>
 	);
