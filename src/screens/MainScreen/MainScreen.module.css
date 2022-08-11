@@ -56,4 +56,5 @@
 
 .socials button:hover {
     transform: translateY(-7px);
+    filter: drop-shadow(0 0 5px var(--text-primary));
 }
