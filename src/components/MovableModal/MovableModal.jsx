@@ -44,25 +44,31 @@ const MovableModal = ({
 	}, []);
 
 	const onMouseDown = () => {
+		let isDragFullScreen = false;
 
-		const dragHandler = ({ movementX, movementY }) => {
+		const dragHandler = (e) => {
 			if (sizes.fullscreen) {
 				turnOffFullScreen();
+				isDragFullScreen = false;
+			} else {
+				isDragFullScreen = e.clientY < 0;
 			}
 
-			setTransition("")
-			const left = modalRef.current?.style.left;
-			const top = modalRef.current?.style.top;
-			setCords({
-				x: movementX + parseInt(left),
-				y: movementY + parseInt(top)
-			});
+			setTransition('');
+			const x = e.movementX + parseInt(modalRef.current?.style.left);
+			const y = e.movementY + parseInt(modalRef.current?.style.top);
+
+			setCords({ x, y });
 		};
 
 		addEventListener('mousemove', dragHandler);
 
 		addEventListener('mouseup', function() {
-			setTransition(oldTransition.current)
+			setTransition(oldTransition.current);
+			if (isDragFullScreen) {
+				turnOnFullScreen();
+				isDragFullScreen = false;
+			}
 			removeEventListener('mousemove', dragHandler);
 			removeEventListener('mouseup	', this);
 		});
@@ -76,13 +82,17 @@ const MovableModal = ({
 
 	const fullScreenButtonHandler = () => {
 		if (!sizes.fullscreen) {
-			oldSizes.current = sizes;
-			oldCords.current = cords;
-			setSizes({ width: '100%', height: '100%', fullscreen: true });
-			setCords({ x: 0, y: 0 });
+			turnOnFullScreen();
 		} else {
 			turnOffFullScreen();
 		}
+	};
+
+	const turnOnFullScreen = () => {
+		oldSizes.current = sizes;
+		oldCords.current = cords;
+		setSizes({ width: '100%', height: '100%', fullscreen: true });
+		setCords({ x: 0, y: 0 });
 	};
 
 	const turnOffFullScreen = () => {
