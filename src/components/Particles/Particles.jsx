@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.css';
-import classes from '../../hooks/classes';
+import classes from '@/hooks/classes';
 
 const Particles = ({
 										 backgroundColor = '#0b0b0b',

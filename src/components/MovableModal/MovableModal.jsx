@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cl from './MovableModal.module.css';
-import closeImg from '../../assets/img/down-arrow.png';
-import collapseImg from '../../assets/img/down-arrow.png';
-import fullScreenImg from '../../assets/img/down-arrow.png';
+import closeImg from '!/close.png';
+import collapseImg from '!/collapse.png';
+import fullScreenImg from '!/fullscreen.png';
 
 const MovableModal = ({
 												modal,
@@ -14,14 +14,14 @@ const MovableModal = ({
 												minWidth = '300px',
 												minHeight = '150px'
 											}) => {
-	const [cords, setCords] = useState({ x: 0, y: 0 });
+	const [cords, setCords] = useState({ x: innerWidth / 2, y: innerHeight / 2 });
 	const [localModal, setLocalModal] = useState(modal);
 	const [transition, setTransition] = useState('.3s ease-in-out');
 	const oldTransition = useRef(transition);
 	const [sizes, setSizes] = useState({ width: minWidth, height: minHeight, fullscreen: false });
 	const oldSizes = useRef(sizes);
 	const oldCords = useRef(cords);
-	let modalRef = useRef(null);
+	const modalRef = useRef(null);
 
 	useEffect(() => {
 		setLocalModal(modal);
@@ -43,7 +43,9 @@ const MovableModal = ({
 		return () => document.removeEventListener('mousedown', handler);
 	}, []);
 
-	const onMouseDown = () => {
+	const onMouseDown = e => {
+		const clickedX = e.clientX - cords.x;
+		const clickedY = e.clientY - cords.y;
 		let isDragFullScreen = false;
 
 		const dragHandler = (e) => {
@@ -55,8 +57,10 @@ const MovableModal = ({
 			}
 
 			setTransition('');
-			const x = e.movementX + parseInt(modalRef.current?.style.left);
-			const y = e.movementY + parseInt(modalRef.current?.style.top);
+			const x = e.clientX - clickedX;
+			const y = e.clientY -	 clickedY;
+
+			console.log(e);
 
 			setCords({ x, y });
 		};
@@ -103,36 +107,38 @@ const MovableModal = ({
 	return (
 		<>
 			{(modal !== 'not-exist' && modal !== 'collapsed') && (
-				<div ref={modalRef}
-						 style={{
-							 top: cords.y,
-							 left: cords.x,
-							 minHeight,
-							 minWidth,
-							 width: sizes.width,
-							 height: sizes.height,
-							 transition
-						 }}
-						 onClick={e => e.stopPropagation()}
-						 data-modal={localModal}
-						 data-fullscreen={sizes.fullscreen}
-						 className={cl.modalContainer}>
-					<div onMouseDown={onMouseDown} className={cl.modalHeader}>
-						<span className={cl.modalHeaderTitle}>{title}</span>
-						<div className={cl.modalHeaderButtons}>
-							<button onClick={() => setModal('collapsed')}>
-								<img src={collapseImg} alt='' />
-							</button>
-							<button onClick={fullScreenButtonHandler}>
-								<img src={fullScreenImg} alt='' />
-							</button>
-							<button onClick={closeModal} className={cl.closeButton}>
-								<img src={closeImg} alt='' />
-							</button>
+				<div className={cl.modalScreen}>
+					<div ref={modalRef}
+							 style={{
+								 top: cords.y,
+								 left: cords.x,
+								 minHeight,
+								 minWidth,
+								 width: sizes.width,
+								 height: sizes.height,
+								 transition
+							 }}
+							 onClick={e => e.stopPropagation()}
+							 data-modal={localModal}
+							 data-fullscreen={sizes.fullscreen}
+							 className={cl.modalContainer}>
+						<div onMouseDown={onMouseDown} className={cl.modalHeader}>
+							<span className={cl.modalHeaderTitle}>{title}</span>
+							<div className={cl.modalHeaderButtons}>
+								<button onClick={() => setModal('collapsed')}>
+									<img src={collapseImg} alt='' />
+								</button>
+								<button onClick={fullScreenButtonHandler}>
+									<img src={fullScreenImg} alt='' />
+								</button>
+								<button onClick={closeModal} className={cl.closeButton}>
+									<img src={closeImg} alt='' />
+								</button>
+							</div>
 						</div>
-					</div>
-					<div className={cl.modalContent}>
-						{children}
+						<div className={cl.modalContent}>
+							{children}
+						</div>
 					</div>
 				</div>
 			)}
