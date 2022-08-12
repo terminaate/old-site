@@ -107,38 +107,36 @@ const MovableModal = ({
 	return (
 		<>
 			{(modal !== 'not-exist' && modal !== 'collapsed') && (
-				<div className={cl.modalScreen}>
-					<div ref={modalRef}
-							 style={{
-								 top: cords.y,
-								 left: cords.x,
-								 minHeight,
-								 minWidth,
-								 width: sizes.width,
-								 height: sizes.height,
-								 transition
-							 }}
-							 onClick={e => e.stopPropagation()}
-							 data-modal={localModal}
-							 data-fullscreen={sizes.fullscreen}
-							 className={cl.modalContainer}>
-						<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
-							<span className={cl.modalHeaderTitle}>{title}</span>
-							<div className={cl.modalHeaderButtons}>
-								<button onClick={() => setModal('collapsed')}>
-									<img src={collapseImg} alt='' />
-								</button>
-								<button onClick={fullScreenButtonHandler}>
-									<img src={fullScreenImg} alt='' />
-								</button>
-								<button onClick={closeModal} className={cl.closeButton}>
-									<img src={closeImg} alt='' />
-								</button>
-							</div>
+				<div ref={modalRef}
+						 style={{
+							 top: cords.y,
+							 left: cords.x,
+							 minHeight,
+							 minWidth,
+							 width: sizes.width,
+							 height: sizes.height,
+							 transition
+						 }}
+						 onClick={e => e.stopPropagation()}
+						 data-modal={localModal}
+						 data-fullscreen={sizes.fullscreen}
+						 className={cl.modalContainer}>
+					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
+						<span className={cl.modalHeaderTitle}>{title}</span>
+						<div className={cl.modalHeaderButtons}>
+							<button onClick={() => setModal('collapsed')}>
+								<img src={collapseImg} alt='' />
+							</button>
+							<button onClick={fullScreenButtonHandler}>
+								<img src={fullScreenImg} alt='' />
+							</button>
+							<button onClick={closeModal} className={cl.closeButton}>
+								<img src={closeImg} alt='' />
+							</button>
 						</div>
-						<div className={cl.modalContent}>
-							{children}
-						</div>
+					</div>
+					<div className={cl.modalContent}>
+						{children}
 					</div>
 				</div>
 			)}
