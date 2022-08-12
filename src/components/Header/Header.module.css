@@ -1,0 +1,33 @@
+.headerContainer {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 20;
+}
+
+.headerContent {
+    position: relative;
+    width: 100%;
+    padding: 7px;
+    border-bottom: 2px solid var(--text-secondary);
+    transition: margin-top .3s;
+}
+
+.headerContent[data-header="false"] {
+    margin-top: -50px;
+}
+
+.triggerHeaderButton {
+    margin-top: 25px;
+    padding: 5px;
+    cursor: pointer;
+    background: none;
+    color: var(--text-primary);
+    transition: transform .3s;
+}
+
+.triggerHeaderButton[data-header="true"] {
+    transform: rotate(180deg);
+}

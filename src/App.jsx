@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import IntroScreen from './screens/IntroScreen/IntroScreen';
 import MainScreen from './screens/MainScreen/MainScreen';
+import Header from './components/Header/Header';
 
 const App = () => {
 	const [intro, setIntro] = useState(true);

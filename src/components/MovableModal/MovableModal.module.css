@@ -1,12 +1,68 @@
+.modalContainer {
+    position: absolute;
+    width: max-content;
+    min-width: 300px;
+    min-height: 150px;
+    margin-block: auto;
+    z-index: 40;
+    transition: opacity .3s, transform .3s;
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+    border-radius: 3px;
+    border: 0.5px solid var(--text-primary);
+    background: #222;
+}
+
+.modalHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.modalHeaderButtons {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.modalHeaderTitle {
+    font-weight: 400;
+    font-size: 15px;
+    opacity: .6;
+    font-family: monospace;
+    margin-left: 4px;
+}
+
+.modalHeader button {
+    padding: 8px;
+    background: none;
+}
+
+.closeButton:hover {
+    background-color: red;
+}
+
+.modalContainer[data-modal="active"] {
+    z-index: 45;
+    box-shadow: 0 0 5px var(--text-primary);
+}
+
+.modalContainer[data-modal="inactive"] {
+    z-index: 40;
+}
+
+.modalContainer[data-modal="not-exist"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
 .modalContent {
     padding: 20px;
-    border-radius: 5px;
     /*background-color: var(--background-primary);*/
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px solid var(--text-primary);
     color: var(--text-primary);
     backdrop-filter: blur(10px);
-    width: max-content;
 }

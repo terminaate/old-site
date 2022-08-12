@@ -8,7 +8,7 @@ const Modal = ({ modal, setModal, children }) => {
 		setLocalModal(modal);
 	}, [modal]);
 
-	const onScreenClickHandler = () => {
+	const closeModal = () => {
 		setLocalModal(false);
 		setTimeout(() => setModal(false), 400);
 	};
@@ -16,7 +16,7 @@ const Modal = ({ modal, setModal, children }) => {
 	return (
 		<>
 			{modal && (
-				<div data-modal={localModal} onClick={onScreenClickHandler} className={cl.modalScreen}>
+				<div data-modal={localModal} onClick={closeModal} className={cl.modalScreen}>
 					<div onClick={e => e.stopPropagation()} className={cl.modalContent}>
 						{children}
 					</div>
