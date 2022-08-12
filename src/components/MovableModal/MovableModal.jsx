@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import cl from './MovableModal.module.css';
 import closeImg from '../../assets/img/down-arrow.png';
 
-const MovableModal = ({ modal, setModal, children, title="MovableModal" }) => {
+const MovableModal = ({ modal, setModal, children, title = 'MovableModal' }) => {
 	const [cords, setCords] = useState({ x: 0, y: 0 });
 	const [localModal, setLocalModal] = useState(modal);
-	const modalRef = useRef(null);
+	let modalRef = useRef(null);
 
 	useEffect(() => {
 		setLocalModal(modal);
@@ -13,22 +13,27 @@ const MovableModal = ({ modal, setModal, children, title="MovableModal" }) => {
 
 	useEffect(() => {
 		const handler = (e) => {
-			if (null === modalRef) return;
-
-			if (!modalRef.current.contains(e.target)) {
-				setModal('inactive');
-			} else {
-				setModal('active');
+			if (null === modalRef.current) {
+				console.log("RETURNED");
+				return
 			}
+
+			if (!modalRef.current?.contains(e.target)) {
+				return setModal('inactive');
+			}
+			setModal('active');
 		};
 
-		addEventListener('click', handler);
-		return () => removeEventListener('click', handler);
+		document.addEventListener('mousedown', handler);
+		return () => document.removeEventListener('mousedown', handler);
 	}, []);
 
 	const onMouseDown = () => {
-		const dragHandler = ({movementX, movementY}) => {
-			setCords({ x: movementX + parseInt(modalRef.current?.style.left), y: movementY + parseInt(modalRef.current?.style.top) });
+		const dragHandler = ({ movementX, movementY }) => {
+			setCords({
+				x: movementX + parseInt(modalRef.current?.style.left),
+				y: movementY + parseInt(modalRef.current?.style.top)
+			});
 		};
 
 		addEventListener('mousemove', dragHandler);
@@ -47,11 +52,12 @@ const MovableModal = ({ modal, setModal, children, title="MovableModal" }) => {
 	return (
 		<>
 			{modal !== 'not-exist' && (
-				<div ref={modalRef} onClick={e => e.stopPropagation()} style={{ top: cords.y, left: cords.x }}
+				<div ref={modalRef} style={{ top: cords.y, left: cords.x }}
+						 onClick={e => e.stopPropagation()}
 						 data-modal={localModal}
 						 className={cl.modalContainer}>
 					<div onMouseDown={onMouseDown} className={cl.modalHeader}>
-						<span className={cl.modalHeaderTitle}>{ title }</span>
+						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>
 							<button onClick={closeModal} className={cl.closeButton}>
 								<img src={closeImg} alt='' />
