@@ -11,7 +11,7 @@ const MainScreen = () => {
 		<>
 			<Header />
 			<div className={cl.mainScreen}>
-				<Particles height={120} className={cl.logoParticles} />
+				<Particles particlesCount={20} height={120} className={cl.logoParticles} />
 				<AnimatedSymbolsText className={cl.logo} infinite={true}>
 					Terminaate
 				</AnimatedSymbolsText>

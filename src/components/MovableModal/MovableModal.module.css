@@ -22,6 +22,10 @@
     transform: scale(0.8);
 }
 
+.modalContainer[data-modal="collapsed"] {
+    opacity: 0;
+}
+
 .modalContainer[data-fullscreen="true"] {
     box-shadow: none;
     border: none;
@@ -30,7 +34,7 @@
 .modalHeader {
     width: 100%;
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: space-between;
     user-select: none;
 }
@@ -46,7 +50,8 @@
     font-size: 15px;
     opacity: .6;
     font-family: monospace;
-    margin-left: 4px;
+    margin-left: 6px;
+    margin-top: 6px;
 }
 
 .modalHeader button {
@@ -64,7 +69,6 @@
 
 .modalContent {
     padding: 4px;
-    /*background-color: var(--background-primary);*/
     color: var(--text-primary);
     backdrop-filter: blur(10px);
 }

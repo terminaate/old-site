@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import cl from './Header.module.css';
 import downArrow from '!/down-arrow.png';
 import statsImg from '!/stats.png';
-import MovableModal from '@/components/MovableModal/MovableModal';
+import StatsModal from '../StatsModal/StatsModal';
 
 const Header = () => {
 	const [header, setHeader] = useState(false);
@@ -12,17 +12,18 @@ const Header = () => {
 		<>
 			<div className={cl.headerContainer}>
 				<div data-header={header} className={cl.headerContent}>
-					<button onClick={() => setStatsModal('active')}>
-						<img src={statsImg} alt='' />
-					</button>
+					<div className={cl.headerButton}>
+						<div data-modal={statsModal} className={cl.headerLine}/>
+						<button onClick={() => setStatsModal('active')}>
+							<img src={statsImg} alt='' />
+						</button>
+					</div>
 				</div>
 				<button onClick={() => setHeader(!header)} data-header={header} className={cl.triggerHeaderButton}>
 					<img src={downArrow} alt='' />
 				</button>
 			</div>
-			<MovableModal modal={statsModal} setModal={setStatsModal}>
-				MY STATS MODAL
-			</MovableModal>
+			<StatsModal modal={statsModal} setModal={setStatsModal} />
 		</>
 	);
 };

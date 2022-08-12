@@ -3,6 +3,7 @@ import cl from './MovableModal.module.css';
 import closeImg from '!/close.png';
 import collapseImg from '!/collapse.png';
 import fullScreenImg from '!/fullscreen.png';
+import classes from '@/hooks/classes';
 
 const MovableModal = ({
 												modal,
@@ -12,7 +13,8 @@ const MovableModal = ({
 												onClose = () => {
 												},
 												minWidth = '300px',
-												minHeight = '150px'
+												minHeight = '150px',
+												className
 											}) => {
 	const [cords, setCords] = useState({ x: innerWidth / 2, y: innerHeight / 2 });
 	const [localModal, setLocalModal] = useState(modal);
@@ -25,6 +27,11 @@ const MovableModal = ({
 
 	useEffect(() => {
 		setLocalModal(modal);
+
+		if (modal === 'active') {
+			setCords(oldCords.current);
+			setSizes(oldSizes.current);
+		}
 	}, [modal]);
 
 	useEffect(() => {
@@ -78,10 +85,14 @@ const MovableModal = ({
 		});
 	};
 
+	const setTimeoutModal = (state) => {
+		setLocalModal(state);
+		setTimeout(() => setModal(state), 400);
+	};
+
 	const closeModal = () => {
 		onClose();
-		setLocalModal('not-exist');
-		setTimeout(() => setModal('not-exist'), 400);
+		setTimeoutModal('not-exist');
 	};
 
 	const fullScreenButtonHandler = () => {
@@ -104,6 +115,13 @@ const MovableModal = ({
 		setSizes({ ...oldSizes.current, fullscreen: false });
 	};
 
+	const collapseModal = () => {
+		oldCords.current = cords;
+		oldSizes.current = sizes;
+		setCords({ x: innerWidth / 2, y: 0 });
+		setTimeoutModal('collapsed');
+	};
+
 	return (
 		<>
 			{(modal !== 'not-exist' && modal !== 'collapsed') && (
@@ -124,7 +142,7 @@ const MovableModal = ({
 					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>
-							<button onClick={() => setModal('collapsed')}>
+							<button onClick={collapseModal}>
 								<img src={collapseImg} alt='' />
 							</button>
 							<button onClick={fullScreenButtonHandler}>
@@ -135,7 +153,7 @@ const MovableModal = ({
 							</button>
 						</div>
 					</div>
-					<div className={cl.modalContent}>
+					<div className={classes(cl.modalContent, className)}>
 						{children}
 					</div>
 				</div>
