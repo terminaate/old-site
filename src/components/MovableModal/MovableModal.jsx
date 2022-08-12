@@ -49,18 +49,18 @@ const MovableModal = ({
 		let isDragFullScreen = false;
 
 		const dragHandler = (e) => {
+			const x = e.clientX - clickedX;
+			const y = e.clientY - clickedY;
+
 			if (sizes.fullscreen) {
 				turnOffFullScreen();
 				isDragFullScreen = false;
+				setCords({ x: cords.x - clickedX, y: cords.y - clickedX });
 			} else {
 				isDragFullScreen = e.clientY < 0;
 			}
 
 			setTransition('');
-			const x = e.clientX - clickedX;
-			const y = e.clientY -	 clickedY;
-
-			console.log(e);
 
 			setCords({ x, y });
 		};
@@ -89,6 +89,7 @@ const MovableModal = ({
 			turnOnFullScreen();
 		} else {
 			turnOffFullScreen();
+			setCords(oldCords.current);
 		}
 	};
 
@@ -101,7 +102,6 @@ const MovableModal = ({
 
 	const turnOffFullScreen = () => {
 		setSizes({ ...oldSizes.current, fullscreen: false });
-		setCords(oldCords.current);
 	};
 
 	return (
@@ -122,7 +122,7 @@ const MovableModal = ({
 							 data-modal={localModal}
 							 data-fullscreen={sizes.fullscreen}
 							 className={cl.modalContainer}>
-						<div onMouseDown={onMouseDown} className={cl.modalHeader}>
+						<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 							<span className={cl.modalHeaderTitle}>{title}</span>
 							<div className={cl.modalHeaderButtons}>
 								<button onClick={() => setModal('collapsed')}>
