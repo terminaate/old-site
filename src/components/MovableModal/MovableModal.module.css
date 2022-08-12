@@ -1,17 +1,33 @@
 .modalContainer {
     position: absolute;
     width: max-content;
-    min-width: 300px;
-    min-height: 150px;
-    margin-block: auto;
     z-index: 40;
-    transition: opacity .3s, transform .3s;
     opacity: 1;
     pointer-events: all;
     transform: scale(1);
     border-radius: 3px;
     border: 0.5px solid var(--text-primary);
-    background: #222;
+    background-color: var(--background-secondary);
+}
+
+.modalContainer[data-modal="active"] {
+    z-index: 45;
+    box-shadow: 0 0 5px var(--text-primary);
+}
+
+.modalContainer[data-modal="inactive"] {
+    z-index: 40;
+}
+
+.modalContainer[data-modal="not-exist"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+.modalContainer[data-fullscreen="true"] {
+    box-shadow: none;
+    border: none;
 }
 
 .modalHeader {
@@ -41,23 +57,12 @@
     background: none;
 }
 
+.modalHeader button:hover {
+    background-color: var(--text-secondary);
+}
+
 .closeButton:hover {
-    background-color: red;
-}
-
-.modalContainer[data-modal="active"] {
-    z-index: 45;
-    box-shadow: 0 0 5px var(--text-primary);
-}
-
-.modalContainer[data-modal="inactive"] {
-    z-index: 40;
-}
-
-.modalContainer[data-modal="not-exist"] {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.8);
+    background-color: red !important;
 }
 
 .modalContent {
