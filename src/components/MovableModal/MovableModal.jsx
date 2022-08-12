@@ -27,11 +27,6 @@ const MovableModal = ({
 
 	useEffect(() => {
 		setLocalModal(modal);
-
-		if (modal === 'active') {
-			setCords(oldCords.current);
-			setSizes(oldSizes.current);
-		}
 	}, [modal]);
 
 	useEffect(() => {
@@ -107,19 +102,12 @@ const MovableModal = ({
 	const turnOnFullScreen = () => {
 		oldSizes.current = sizes;
 		oldCords.current = cords;
-		setSizes({ width: '100%', height: '100%', fullscreen: true });
-		setCords({ x: 0, y: 0 });
+		setSizes({ width: '100%', height: '93%', fullscreen: true });
+		setCords({ x: 0, y: innerHeight - (innerHeight / 100) * 93 });
 	};
 
 	const turnOffFullScreen = () => {
 		setSizes({ ...oldSizes.current, fullscreen: false });
-	};
-
-	const collapseModal = () => {
-		oldCords.current = cords;
-		oldSizes.current = sizes;
-		setCords({ x: innerWidth / 2, y: 0 });
-		setTimeoutModal('collapsed');
 	};
 
 	return (
@@ -142,7 +130,7 @@ const MovableModal = ({
 					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>
-							<button onClick={collapseModal}>
+							<button onClick={() => setTimeoutModal('collapsed')}>
 								<img src={collapseImg} alt='' />
 							</button>
 							<button onClick={fullScreenButtonHandler}>
