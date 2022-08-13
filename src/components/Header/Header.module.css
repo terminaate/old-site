@@ -7,7 +7,7 @@
     z-index: 20;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .headerContainer {
         display: none;
     }
@@ -82,6 +82,19 @@
     background: none;
     color: var(--text-primary);
     transition: transform .3s;
+    animation: triggerAnim 1s infinite;
+}
+
+@keyframes triggerAnim {
+    0% {
+        margin-top: 35px;
+    }
+    50% {
+        margin-top: 45px;
+    }
+    100% {
+        margin-top: 35px;
+    }
 }
 
 .triggerHeaderButton[data-header="true"] {

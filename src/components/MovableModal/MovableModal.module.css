@@ -5,6 +5,7 @@
     border-radius: 3px;
     border: 0.5px solid var(--text-secondary);
     background-color: var(--background-secondary);
+    /*transform: translate(-50%, -50%);*/
 }
 
 .modalContainer[data-modal="active"] {

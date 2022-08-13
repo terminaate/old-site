@@ -3,7 +3,7 @@ import MovableModal from '../MovableModal/MovableModal';
 
 const StatsModal = ({modal, setModal}) => {
 	return (
-		<MovableModal title={"Stats"}  modal={modal} setModal={setModal}>
+		<MovableModal title={"Stats"} width={"27%"} height={"75%"}  modal={modal} setModal={setModal}>
 			MY STATS MODAL
 		</MovableModal>
 	);

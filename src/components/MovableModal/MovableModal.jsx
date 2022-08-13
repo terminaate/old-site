@@ -14,19 +14,21 @@ const MovableModal = ({
 												},
 												minWidth = '300px',
 												minHeight = '150px',
+												width = minWidth,
+												height = minHeight,
 												className
 											}) => {
-	const [cords, setCords] = useState({ x: innerWidth / 2, y: innerHeight / 2 });
+	const [sizes, setSizes] = useState({ width, height, fullscreen: false });
+	const [cords, setCords] = useState({ x: innerWidth / 4, y: innerHeight / 7 });
 	const [localModal, setLocalModal] = useState(modal);
 	const [transition, setTransition] = useState('.3s ease-in-out');
 	const oldTransition = useRef(transition);
-	const [sizes, setSizes] = useState({ width: minWidth, height: minHeight, fullscreen: false });
 	const oldSizes = useRef(sizes);
 	const oldCords = useRef(cords);
 	const modalRef = useRef(null);
 
 	useEffect(() => {
-		setLocalModal(modal);
+		setTimeoutModal(modal);
 	}, [modal]);
 
 	useEffect(() => {
@@ -102,8 +104,8 @@ const MovableModal = ({
 	const turnOnFullScreen = () => {
 		oldSizes.current = sizes;
 		oldCords.current = cords;
-		setSizes({ width: '100%', height: '93%', fullscreen: true });
-		setCords({ x: 0, y: innerHeight - (innerHeight / 100) * 93 });
+		setSizes({ width: '100%', height: '95%', fullscreen: true });
+		setCords({ x: 0, y: innerHeight - (innerHeight / 100) * 95 });
 	};
 
 	const turnOffFullScreen = () => {
