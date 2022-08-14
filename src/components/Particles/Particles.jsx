@@ -93,10 +93,13 @@ const Particles = ({
 
 			this.position = () => {
 				this.x += this.velocityX;
+				if (this.x < 0) {
+					this.x = ctx.canvas.width - (this.x * 10);
+				}
 
 				this.y -= this.velocityY;
 				if (this.y < 0) {
-					this.y = ctx.canvas.height - this.y;
+					this.y = ctx.canvas.height - (this.y * 10);
 				}
 			};
 
