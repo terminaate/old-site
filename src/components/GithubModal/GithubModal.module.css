@@ -38,6 +38,8 @@
 .userNickname {
     font-weight: 400;
     opacity: 0.5;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .userBio {

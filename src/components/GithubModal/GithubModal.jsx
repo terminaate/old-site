@@ -52,8 +52,8 @@ const GithubModal = ({ modal, setModal }) => {
 											setModal={setModal}>
 					<div className={cl.userInfo}>
 						<div className={cl.userAvatar} style={{ backgroundImage: `url(${user.avatar_url})` }} />
-						<span className={cl.userName}>{user.name}</span>
-						<AnimatedSymbolsText infinite={true} className={cl.userNickname}>{user.login}</AnimatedSymbolsText>
+						<span  className={cl.userName}>{user.name}</span>
+						<AnimatedSymbolsText onClick={() => open("//github.com/terminaate")} infinite={true} className={cl.userNickname}>{user.login}</AnimatedSymbolsText>
 						<span className={cl.userBio}>{user.bio}</span>
 						<div className={cl.userFollowers}>
 							<img src={usersImg} alt='' />
@@ -63,8 +63,7 @@ const GithubModal = ({ modal, setModal }) => {
 							<img src={locationImg} alt='' />
 							<span>{user.location}</span>
 						</div>
-						<div onClick={() => setUser({ ...user, blog: 'You already here ;)' })}
-								 className={classes(cl.userFollowers, cl.userLocation)}>
+						<div className={classes(cl.userFollowers, cl.userLocation)}>
 							<img src={linkImg} alt='' />
 							<span>{user.blog}</span>
 						</div>
@@ -73,7 +72,7 @@ const GithubModal = ({ modal, setModal }) => {
 						{repos.map((repo, index) => (
 							<div className={cl.repoContainer} key={index}>
 								<div className={cl.repoHeader}>
-									<div className={cl.repoName} onClick={() => open(repo.html_for, '_blank')}>
+									<div className={cl.repoName} onClick={() => open(repo.svn_url, '_blank')}>
 										<img src={repo.owner.avatar_url} alt='' />
 										<span>{repo.full_name}</span>
 									</div>

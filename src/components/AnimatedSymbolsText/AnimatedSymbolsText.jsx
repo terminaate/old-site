@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TextService from '@/services/TextService';
 
-const AnimatedSymbolsText = ({ className, delay = 200, clearDelay = delay, infinite = false, children }) => {
+const AnimatedSymbolsText = ({ className, delay = 200, clearDelay = delay, infinite = false, children, onClick }) => {
 	const [text, setText] = useState([...children]);
 	const [animate, setAnimate] = useState(false);
 
@@ -32,7 +32,7 @@ const AnimatedSymbolsText = ({ className, delay = 200, clearDelay = delay, infin
 	}, [animate]);
 
 	return (
-		<span className={className}>
+		<span onClick={onClick} className={className}>
 			{text.join('')}
 		</span>
 	);
