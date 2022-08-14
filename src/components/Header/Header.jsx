@@ -4,7 +4,7 @@ import downArrow from '!/down-arrow.png';
 import statsImg from '!/stats.png';
 import StatsModal from '../StatsModal/StatsModal';
 import GithubModal from '../GithubModal/GithubModal';
-import githubImg from '!/github.svg';
+import githubImg from '!/logos/github.svg';
 
 const Header = () => {
 	const [header, setHeader] = useState(false);

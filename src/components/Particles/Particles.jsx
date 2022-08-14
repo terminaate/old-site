@@ -78,10 +78,12 @@ const Particles = ({
 
 		init();
 
-		window.onresize = () => {
+		const resizeHandler = () => {
 			ctx.canvas.width = getWidth();
 			ctx.canvas.height = getHeight();
 		};
+
+		addEventListener('resize', resizeHandler);
 
 		function Particle() {
 			this.x = Math.random() * ctx.canvas.width;
@@ -132,7 +134,10 @@ const Particles = ({
 			loop();
 		}
 
-		return () => cancelAnimationFrame(animationRequestFrameId);
+		return () => {
+			cancelAnimationFrame(animationRequestFrameId);
+			removeEventListener('resize', resizeHandler);
+		};
 	}, []);
 
 	return (

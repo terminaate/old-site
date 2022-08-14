@@ -6,11 +6,11 @@ import usersImg from '!/users.png';
 import locationImg from '!/location.png';
 import linkImg from '!/link.png';
 import clockImg from '!/clock.svg';
-import htmlImg from '!/html.svg';
-import cssImg from '!/css.svg';
-import javascriptImg from '!/javascript.svg';
-import typescriptImg from '!/typescript.svg';
-import pythonImg from '!/python.svg';
+import htmlImg from '!/logos/html.svg';
+import cssImg from '!/logos/css.svg';
+import javascriptImg from '!/logos/javascript.svg';
+import typescriptImg from '!/logos/typescript.svg';
+import pythonImg from '!/logos/python.svg';
 import classes from '@/hooks/classes';
 import AnimatedSymbolsText from '../AnimatedSymbolsText/AnimatedSymbolsText';
 
@@ -47,7 +47,7 @@ const GithubModal = ({ modal, setModal }) => {
 	return (
 		<>
 			{Object.values(user).length > 0 && (
-				<MovableModal minWidth={'800px'} className={cl.githubModal} width={'50%'} title={'My github ❤'}
+				<MovableModal minWidth={'800px'} className={cl.githubModal} width={'50%'} title={'❤️My github️'}
 											height={'60%'} modal={modal}
 											setModal={setModal}>
 					<div className={cl.userInfo}>

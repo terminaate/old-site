@@ -3,8 +3,6 @@
     /*align-items: center;*/
     justify-content: center;
     column-gap: 40px;
-    height: 90%;
-
 }
 
 .userInfo {
@@ -35,6 +33,7 @@
     opacity: 0.5;
     text-decoration: underline;
     cursor: pointer;
+    width: max-content;
 }
 
 .userBio {
@@ -61,7 +60,6 @@
 
 .userLocation {
     margin-top: 10px;
-    cursor: pointer;
 }
 
 .userRepos {
