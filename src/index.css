@@ -14,7 +14,8 @@
     --background-darked: rgba(0, 0, 0, .3);
     --red: #da1111;
     --text-primary: #c9bfbf;
-    --text-secondary: rgba(201, 191, 191, 0.18);
+    --text-secondary: rgba(255, 255, 255, .3);
+    --text-secondary-alt: rgba(201, 191, 191, 0.18);
     --font-primary: 'Source Code Pro', monospace;
     --font-logo: 'Libre Barcode 39 Text', cursive;
 }

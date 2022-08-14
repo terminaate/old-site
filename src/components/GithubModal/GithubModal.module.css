@@ -1,12 +1,15 @@
 .githubModal {
     background: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
 }
 
 .githubModal > div:nth-child(2) {
     display: flex;
     /*align-items: center;*/
     justify-content: center;
+    column-gap: 40px;
+    height: 90%;
+
 }
 
 .userInfo {
@@ -15,14 +18,14 @@
 }
 
 .userAvatar {
-    border: 0.5px solid var(--text-secondary);
+    border: 0.5px solid var(--text-secondary-alt);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     border-radius: 50%;
     height: 128px;
     width: 128px;
-    box-shadow: 0 0 20px var(--text-secondary);
+    box-shadow: 0 0 20px var(--text-secondary-alt);
 }
 
 .userName {
@@ -61,13 +64,72 @@
 
 .userLocation {
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .userRepos {
     width: 50%;
-    border: 1px solid white;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
-    height: min-content;
+.repoContainer {
+    width: 100%;
+    padding-block: 20px;
+    border-bottom: 2px solid var(--text-secondary-alt);
+}
+
+.repoHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.repoName {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.repoName img {
+    height: 20px;
+    border-radius: 100%;
+}
+
+.repoName span {
+    font-weight: 500;
+    font-family: var(--font-primary);
+    text-shadow: 0 0 5px var(--text-primary);
+}
+
+.repoDesc {
+    font-size: 15px;
+    margin-block: 10px;
+    color: var(--text-secondary)
+}
+
+.repoLastCommit {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-top: 15px;
+}
+
+.repoLastCommit img {
+    opacity: .5;
+}
+
+.repoLastCommit span {
+    font-size: 15px;
+}
+
+.repoLanguage {
+    margin-right: 10px;
+    height: 18px;
 }

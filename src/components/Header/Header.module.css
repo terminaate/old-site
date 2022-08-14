@@ -18,7 +18,7 @@
     width: 100%;
     padding: 4px;
     height: 5%;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid var(--text-secondary-alt);
     transition: margin-top .3s;
     display: flex;
     align-items: center;
@@ -33,7 +33,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    border-left: 2px solid var(--text-secondary)
+    border-left: 2px solid var(--text-secondary-alt)
 }
 
 .headerButton {
@@ -68,7 +68,7 @@
 }
 
 .headerButton button:hover {
-    background-color: var(--text-secondary);
+    background-color: var(--text-secondary-alt);
 }
 
 .headerContent[data-header="false"] {
