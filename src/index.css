@@ -26,6 +26,16 @@ body {
     font-family: var(--font-primary);
 }
 
+::-webkit-scrollbar {
+    width: 2px;
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--text-primary);
+    border-radius: 5px;
+}
+
 @keyframes opacityAnim {
     from {
         opacity: 0;

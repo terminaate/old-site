@@ -79,7 +79,10 @@ const MovableModal = ({
 	const closeModal = () => {
 		onClose();
 		setTimeoutModal('not-exist');
-		setTimeout(() => setCords({ x: initialX, y: initialY }), 400);
+		setTimeout(() => {
+			setCords({ x: initialX, y: initialY });
+			setSizes({width, height, fullscreen: false})
+		}, 400);
 	};
 
 	const fullScreenButtonHandler = () => {
