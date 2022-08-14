@@ -17,10 +17,12 @@ const MovableModal = ({
 												minHeight = '150px',
 												width = minWidth,
 												height = minHeight,
+												initialX = innerWidth / 4,
+												initialY = innerHeight / 7,
 												className
 											}) => {
 	const [sizes, setSizes] = useState({ width, height, fullscreen: false });
-	const [cords, setCords] = useState({ x: innerWidth / 4, y: innerHeight / 7 });
+	const [cords, setCords] = useState({ x: initialX, y: initialY });
 	const [localModal, setLocalModal] = useState(modal);
 	const [transition, setTransition] = useState('.3s ease-in-out');
 	const oldTransition = useRef(transition);
@@ -32,7 +34,7 @@ const MovableModal = ({
 		setTimeoutModal(modal);
 	}, [modal]);
 
-	useOutsideClick(modalRef, () => setModal("inactive"), () => setModal("active"))
+	useOutsideClick(modalRef, () => setModal('inactive'), () => setModal('active'));
 
 	const onMouseDown = e => {
 		const clickedX = e.clientX - cords.x;
@@ -77,6 +79,7 @@ const MovableModal = ({
 	const closeModal = () => {
 		onClose();
 		setTimeoutModal('not-exist');
+		setTimeout(() => setCords({ x: initialX, y: initialY }), 400);
 	};
 
 	const fullScreenButtonHandler = () => {
