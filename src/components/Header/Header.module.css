@@ -62,9 +62,12 @@
     background: none;
     padding-block: 2px;
     padding-inline: 2px;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .headerButton button:hover {

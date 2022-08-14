@@ -32,8 +32,10 @@
 }
 
 .introScreenContainer {
-    width: 30%;
-    min-width: 100px;
+    /*width: 30%;*/
+    /*min-width: 100px;*/
+    width: 100%;
+    max-width: 450px;
 }
 
 .introTypingVisitedText {

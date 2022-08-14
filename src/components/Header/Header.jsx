@@ -5,16 +5,27 @@ import statsImg from '!/stats.png';
 import StatsModal from '../StatsModal/StatsModal';
 import GithubModal from '../GithubModal/GithubModal';
 import githubImg from '!/logos/github.svg';
+import discordImg from '!/logos/discord.svg';
+import Notification from '../Notification/Notification';
 
 const Header = () => {
 	const [header, setHeader] = useState(false);
 	const [statsModal, setStatsModal] = useState('not-exist');
 	const [githubModal, setGithubModal] = useState('not-exist');
+	const [discordNotify, setDiscordNotify] = useState('');
 
 	const setModalState = (state, setState) => {
 		if (state !== 'not-exist') {
 			setState();
 		}
+	};
+
+	// TODO
+	// Write backend for sending message to me from bot xD
+
+	const copyDiscordTag = () => {
+		navigator.clipboard.writeText('Terminaate#9274');
+		alert('Discord tag copied!');
 	};
 
 	const inactiveAllModals = () => {
@@ -47,6 +58,12 @@ const Header = () => {
 							<img src={githubImg} alt='' />
 						</button>
 					</div>
+					<div className={cl.headerButton}>
+						<div data-modal={'not-exist'} className={cl.headerLine} />
+						<button onClick={copyDiscordTag}>
+							<img src={discordImg} alt='' />
+						</button>
+					</div>
 				</div>
 				<button onClick={() => setHeader(!header)} data-header={header} className={cl.triggerHeaderButton}>
 					<img src={downArrow} alt='' />
@@ -54,6 +71,7 @@ const Header = () => {
 			</div>
 			<StatsModal modal={statsModal} setModal={setStatsModal} />
 			<GithubModal modal={githubModal} setModal={setGithubModal} />
+			<Notification state={discordNotify} setState={setDiscordNotify} />
 		</>
 	);
 };

@@ -1,0 +1,20 @@
+.notificationContainer {
+    position: fixed;
+    bottom: 2rem;
+    height: 30px;
+    width: max-content;
+    background: none;
+    border: 1px solid var(--text-primary);
+    text-shadow: 0 0 10px var(--text-primary);
+    transition: .3s;
+    padding: 10px;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notificationContainer[data-state="false"] {
+    opacity: 0;
+}

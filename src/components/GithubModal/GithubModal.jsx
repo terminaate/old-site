@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import MovableModal from '../MovableModal/MovableModal';
 import cl from './GithubModal.module.css';
 import GithubService from '@/services/GithubService';
@@ -52,8 +52,9 @@ const GithubModal = ({ modal, setModal }) => {
 											setModal={setModal}>
 					<div className={cl.userInfo}>
 						<div className={cl.userAvatar} style={{ backgroundImage: `url(${user.avatar_url})` }} />
-						<span  className={cl.userName}>{user.name}</span>
-						<AnimatedSymbolsText onClick={() => open("//github.com/terminaate")} infinite={true} className={cl.userNickname}>{user.login}</AnimatedSymbolsText>
+						<span className={cl.userName}>{user.name}</span>
+						<AnimatedSymbolsText onClick={() => open('//github.com/terminaate')} infinite={true}
+																 className={cl.userNickname}>{user.login}</AnimatedSymbolsText>
 						<span className={cl.userBio}>{user.bio}</span>
 						<div className={cl.userFollowers}>
 							<img src={usersImg} alt='' />

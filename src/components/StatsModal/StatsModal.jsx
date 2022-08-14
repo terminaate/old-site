@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovableModal from '../MovableModal/MovableModal';
 import cl from './StatsModal.module.css';
 
@@ -20,8 +20,6 @@ const StatsModal = ({ modal, setModal }) => {
 			webdriver,
 			product
 		} = navigator;
-
-		console.log(navigator);
 
 		setStats([
 			{
