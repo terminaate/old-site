@@ -4,6 +4,7 @@ import closeImg from '!/close.png';
 import collapseImg from '!/collapse.png';
 import fullScreenImg from '!/fullscreen.png';
 import classes from '@/hooks/classes';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const MovableModal = ({
 												modal,
@@ -31,21 +32,7 @@ const MovableModal = ({
 		setTimeoutModal(modal);
 	}, [modal]);
 
-	useEffect(() => {
-		const handler = (e) => {
-			if (null === modalRef.current) {
-				return;
-			}
-
-			if (!modalRef.current?.contains(e.target)) {
-				return setModal('inactive');
-			}
-			setModal('active');
-		};
-
-		document.addEventListener('mousedown', handler);
-		return () => document.removeEventListener('mousedown', handler);
-	}, []);
+	useOutsideClick(modalRef, () => setModal("inactive"), () => setModal("active"))
 
 	const onMouseDown = e => {
 		const clickedX = e.clientX - cords.x;
@@ -128,7 +115,7 @@ const MovableModal = ({
 						 onClick={e => e.stopPropagation()}
 						 data-modal={localModal}
 						 data-fullscreen={sizes.fullscreen}
-						 className={cl.modalContainer}>
+						 className={classes(cl.modalContainer, className)}>
 					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>
@@ -143,7 +130,7 @@ const MovableModal = ({
 							</button>
 						</div>
 					</div>
-					<div className={classes(cl.modalContent, className)}>
+					<div className={cl.modalContent}>
 						{children}
 					</div>
 				</div>

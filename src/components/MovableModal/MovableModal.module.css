@@ -5,7 +5,6 @@
     border-radius: 3px;
     border: 0.5px solid var(--text-secondary);
     background-color: var(--background-secondary);
-    /*transform: translate(-50%, -50%);*/
 }
 
 .modalContainer[data-modal="active"] {
@@ -35,7 +34,7 @@
 .modalHeader {
     width: 100%;
     display: flex;
-    /*align-items: center;*/
+    align-items: center;
     justify-content: space-between;
     user-select: none;
 }
@@ -52,7 +51,7 @@
     opacity: .6;
     font-family: monospace;
     margin-left: 6px;
-    margin-top: 6px;
+    /*margin-top: 6px;*/
 }
 
 .modalHeader button {
@@ -65,11 +64,12 @@
 }
 
 .closeButton:hover {
-    background-color: red !important;
+    background-color: var(--red) !important;
 }
 
 .modalContent {
     padding: 4px;
     color: var(--text-primary);
-    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 100%;
 }

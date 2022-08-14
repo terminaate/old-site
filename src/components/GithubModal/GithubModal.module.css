@@ -1,0 +1,73 @@
+.githubModal {
+    background: none;
+    backdrop-filter: blur(10px);
+}
+
+.githubModal > div:nth-child(2) {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userAvatar {
+    border: 0.5px solid var(--text-secondary);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 128px;
+    width: 128px;
+    box-shadow: 0 0 20px var(--text-secondary);
+}
+
+.userName {
+    font-weight: 500;
+    font-family: var(--font-primary);
+    margin-top: 10px;
+    line-height: 150%;
+}
+
+.userNickname {
+    font-weight: 400;
+    opacity: 0.5;
+}
+
+.userBio {
+    margin-top: 10px;
+}
+
+
+.userFollowers {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-family: var(--font-primary);
+}
+
+.userFollowers img {
+    height: 14px;
+    opacity: 0.5;
+}
+
+.userFollowers span span {
+    opacity: 0.5;
+}
+
+.userLocation {
+    margin-top: 10px;
+}
+
+.userRepos {
+    width: 50%;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+
+    height: min-content;
+}
