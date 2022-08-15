@@ -15,42 +15,24 @@ const Particles = ({
 	const canvasRef = useRef(null);
 
 	const getHeight = () => {
-		if (typeof height === 'number') {
-			return height;
-		}
-
-		if (height === '100%') {
-			return innerHeight;
-		}
-
-		let heightString = '';
-		for (const i of height) {
-			if (Number(i)) {
-				heightString += i;
-			}
-		}
-
-		return Number(heightString);
+		if (typeof height === 'number') return height;
+		if (height.endsWith('%')) return (innerHeight / 100) * parseInt(height);
+		return parseInt(height);
 	};
 
 	const getWidth = () => {
-		if (typeof width === 'number') {
-			return width;
-		}
-
-		if (width === '100%') {
-			return innerWidth;
-		}
-
-		let widthString = '';
-		for (const i of width) {
-			if (Number(i)) {
-				widthString += i;
-			}
-		}
-
-		return Number(widthString);
+		if (typeof width === 'number') return width;
+		if (width.endsWith('%')) return (innerWidth / 100) * parseInt(width);
+		return parseInt(width);
 	};
+
+	const [localHeight, setLocalHeight] = useState(getHeight());
+	const [localWidth, setLocalWidth] = useState(getWidth());
+
+	useEffect(() => {
+		setLocalWidth(getWidth());
+		setLocalHeight(getHeight());
+	}, [width, height]);
 
 	const getParticlesSize = () => {
 		if (particlesSize < 1.2) {
@@ -71,16 +53,16 @@ const Particles = ({
 
 	useEffect(() => {
 		const ctx = canvasRef.current.getContext('2d');
-		ctx.canvas.width = getWidth();
-		ctx.canvas.height = getHeight();
+		ctx.canvas.width = localWidth;
+		ctx.canvas.height = localHeight;
 		const particles = [];
 		let animationRequestFrameId;
 
 		init();
 
 		const resizeHandler = () => {
-			ctx.canvas.width = getWidth();
-			ctx.canvas.height = getHeight();
+			setLocalHeight(getHeight());
+			setLocalWidth(getWidth());
 		};
 
 		addEventListener('resize', resizeHandler);
@@ -144,8 +126,8 @@ const Particles = ({
 	}, []);
 
 	return (
-		<div style={{ height, width }} className={classes(cl.particlesContainer, className)}>
-			<canvas ref={canvasRef} />
+		<div style={{ height: localHeight, width: localWidth }} className={classes(cl.particlesContainer, className)}>
+			<canvas ref={canvasRef} height={localHeight} width={localWidth} />
 		</div>
 	);
 };

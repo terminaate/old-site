@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import cl from './Header.module.css';
 import downArrow from '!/down-arrow.png';
 import statsImg from '!/stats.png';
@@ -6,13 +6,17 @@ import StatsModal from '../StatsModal/StatsModal';
 import GithubModal from '../GithubModal/GithubModal';
 import githubImg from '!/logos/github.svg';
 import discordImg from '!/logos/discord.svg';
-import Notification from '../Notification/Notification';
+import settingsImg from '!/settings.svg';
+import SettingsModal from '../SettingsModal/SettingsModal';
+import MainScreenContext from '../../contexts/MainScreenContext';
 
 const Header = () => {
 	const [header, setHeader] = useState(false);
 	const [statsModal, setStatsModal] = useState('not-exist');
 	const [githubModal, setGithubModal] = useState('not-exist');
-	const [discordNotify, setDiscordNotify] = useState('');
+	// const [discordNotify, setDiscordNotify] = useState('');
+	const [settingsModal, setSettingsModal] = useState('not-exist');
+	const [mainContext, setMainContext] = useContext(MainScreenContext);
 
 	const setModalState = (state, setState) => {
 		if (state !== 'not-exist') {
@@ -31,6 +35,7 @@ const Header = () => {
 	const inactiveAllModals = () => {
 		setModalState(statsModal, () => setStatsModal('inactive'));
 		setModalState(githubModal, () => setGithubModal('inactive'));
+		setModalState(settingsModal, () => setSettingsModal('inactive'));
 	};
 
 	const openModal = (state, setState) => {
@@ -64,6 +69,12 @@ const Header = () => {
 							<img src={discordImg} alt='' />
 						</button>
 					</div>
+					<div className={cl.headerButton}>
+						<div data-modal={settingsModal} className={cl.headerLine} />
+						<button onClick={() => openModal(settingsModal, setSettingsModal)}>
+							<img src={settingsImg} alt='' />
+						</button>
+					</div>
 				</div>
 				<button onClick={() => setHeader(!header)} data-header={header} className={cl.triggerHeaderButton}>
 					<img src={downArrow} alt='' />
@@ -71,7 +82,8 @@ const Header = () => {
 			</div>
 			<StatsModal modal={statsModal} setModal={setStatsModal} />
 			<GithubModal modal={githubModal} setModal={setGithubModal} />
-			<Notification state={discordNotify} setState={setDiscordNotify} />
+			{/*<Notification state={discordNotify} setState={setDiscordNotify} />*/}
+			<SettingsModal modal={settingsModal} setModal={setSettingsModal} />
 		</>
 	);
 };
