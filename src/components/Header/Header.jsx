@@ -19,7 +19,7 @@ const Header = () => {
 	const [mainContext, setMainContext] = useContext(MainScreenContext);
 
 	const setModalState = (state, setState) => {
-		if (state !== 'not-exist') {
+		if (state !== 'not-exist' && state !== "collapsed") {
 			setState();
 		}
 	};
