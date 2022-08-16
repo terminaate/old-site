@@ -30,6 +30,9 @@ const MovableModal = ({
 	const oldCords = useRef(cords);
 	const modalRef = useRef(null);
 
+	// TODO
+	// Fix bug with fullscreen
+
 	useEffect(() => {
 		setTimeoutModal(modal);
 	}, [modal]);
@@ -45,16 +48,16 @@ const MovableModal = ({
 			const x = e.clientX - clickedX;
 			const y = e.clientY - clickedY;
 
-			if (sizes.fullscreen) {
+
+			if (sizes.fullscreen && y > 0) {
 				turnOffFullScreen();
 				isDragFullScreen = false;
-				setCords({ x: cords.x - clickedX, y: cords.y - clickedX });
-			} else {
-				isDragFullScreen = e.clientY < 0;
+				setCords({ x, y });
 			}
 
-			setTransition('');
+			isDragFullScreen = y < 0;
 
+			setTransition('');
 			setCords({ x, y });
 		};
 
@@ -81,7 +84,7 @@ const MovableModal = ({
 		setTimeoutModal('not-exist');
 		setTimeout(() => {
 			setCords({ x: initialX, y: initialY });
-			setSizes({width, height, fullscreen: false})
+			setSizes({ width, height, fullscreen: false });
 		}, 400);
 	};
 
@@ -95,7 +98,7 @@ const MovableModal = ({
 	};
 
 	const turnOnFullScreen = () => {
-		oldSizes.current = sizes;
+		oldSizes.current = !sizes.fullscreen ? sizes : oldSizes.current;
 		oldCords.current = cords;
 		setSizes({ width: '100%', height: '95%', fullscreen: true });
 		setCords({ x: 0, y: innerHeight - (innerHeight / 100) * 95 });
@@ -104,6 +107,9 @@ const MovableModal = ({
 	const turnOffFullScreen = () => {
 		setSizes({ ...oldSizes.current, fullscreen: false });
 	};
+
+	// TODO
+	// Do a borders container, and border events for resizing a modal
 
 	return (
 		<>
