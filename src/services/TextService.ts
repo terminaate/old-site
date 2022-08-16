@@ -1,5 +1,5 @@
 class TextService {
-	utf8ToHex(s) {
+	public static utf8ToHex(s: string): string {
 		const utf8encoder = new TextEncoder();
 		const encodedBuffer = utf8encoder.encode(s);
 		let encodedString = '';
@@ -10,4 +10,4 @@ class TextService {
 	}
 }
 
-export default new TextService();
+export default TextService;

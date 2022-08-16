@@ -1,4 +1,5 @@
-export default (...classesList) => {
+// Shitcode types for classesList
+export default (...classesList: Array<any>) => {
 	const formatedClasses = [];
 	if (!Array.isArray(classesList)) {
 		return;

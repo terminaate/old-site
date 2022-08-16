@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import IntroScreen from '@/screens/IntroScreen/IntroScreen';
 import MainScreen from '@/screens/MainScreen/MainScreen';
 
-const App = () => {
-	const [intro, setIntro] = useState(true);
+const App: FC = () => {
+	const [intro, setIntro] = useState<boolean>(true);
 
 	return (
 		<>

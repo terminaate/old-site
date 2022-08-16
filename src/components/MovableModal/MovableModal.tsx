@@ -1,26 +1,43 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import cl from './MovableModal.module.css';
 import closeImg from '!/close.png';
 import collapseImg from '!/collapse.png';
 import fullScreenImg from '!/fullscreen.png';
-import classes from '@/hooks/classes';
-import useOutsideClick from '../../hooks/useOutsideClick';
+import useClasses from '@/hooks/useClasses';
+import useOutsideClick from '@/hooks/useOutsideClick';
 
-const MovableModal = ({
-												modal,
-												setModal,
-												children,
-												title = 'MovableModal',
-												onClose = () => {
-												},
-												minWidth = '300px',
-												minHeight = '150px',
-												width = minWidth,
-												height = minHeight,
-												initialX = innerWidth / 4,
-												initialY = innerHeight / 7,
-												className
-											}) => {
+export type MovableModalStatement = 'not-exist' | 'collapsed' | 'active' | 'inactive'
+
+interface IMovableModal {
+	modal: MovableModalStatement;
+	setModal: React.Dispatch<React.SetStateAction<MovableModalStatement>>;
+	children?: ReactNode;
+	title?: string;
+	onClose?: () => void;
+	minWidth?: string;
+	minHeight?: string;
+	width?: string;
+	height?: string;
+	initialX?: number;
+	initialY?: number;
+	className?: string;
+}
+
+const MovableModal: FC<IMovableModal> = ({
+																					 modal,
+																					 setModal,
+																					 children,
+																					 title = 'MovableModal',
+																					 onClose = () => {
+																					 },
+																					 minWidth = '300px',
+																					 minHeight = '150px',
+																					 width = minWidth,
+																					 height = minHeight,
+																					 initialX = innerWidth / 4,
+																					 initialY = innerHeight / 7,
+																					 className = ''
+																				 }) => {
 	const [sizes, setSizes] = useState({ width, height, fullscreen: false });
 	const [cords, setCords] = useState({ x: initialX, y: initialY });
 	const [localModal, setLocalModal] = useState(modal);
@@ -39,12 +56,12 @@ const MovableModal = ({
 
 	useOutsideClick(modalRef, () => setModal('inactive'), () => setModal('active'));
 
-	const onMouseDown = e => {
+	const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
 		const clickedX = e.clientX - cords.x;
 		const clickedY = e.clientY - cords.y;
 		let isDragFullScreen = false;
 
-		const dragHandler = (e) => {
+		const dragHandler = (e: MouseEvent) => {
 			const x = e.clientX - clickedX;
 			const y = e.clientY - clickedY;
 
@@ -63,18 +80,24 @@ const MovableModal = ({
 
 		addEventListener('mousemove', dragHandler);
 
-		addEventListener('mouseup', function() {
+		const onMouseUp = () => {
 			setTransition(oldTransition.current);
 			if (isDragFullScreen) {
 				turnOnFullScreen();
 				isDragFullScreen = false;
 			}
 			removeEventListener('mousemove', dragHandler);
-			removeEventListener('mouseup	', this);
-		});
+			removeMouseUp();
+		};
+
+		const removeMouseUp = () => {
+			removeEventListener('mouseup', onMouseUp);
+		};
+
+		addEventListener('mouseup', onMouseUp);
 	};
 
-	const setTimeoutModal = (state) => {
+	const setTimeoutModal = (state: MovableModalStatement) => {
 		setLocalModal(state);
 		setTimeout(() => setModal(state), 400);
 	};
@@ -127,7 +150,7 @@ const MovableModal = ({
 						 onClick={e => e.stopPropagation()}
 						 data-modal={localModal}
 						 data-fullscreen={sizes.fullscreen}
-						 className={classes(cl.modalContainer, className)}>
+						 className={useClasses(cl.modalContainer, className)}>
 					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>

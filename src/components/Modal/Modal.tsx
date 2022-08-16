@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import cl from './Modal.module.css';
 
-const Modal = ({ modal, setModal, children }) => {
-	const [localModal, setLocalModal] = useState(modal);
+interface IModal {
+	modal: boolean;
+	setModal: React.Dispatch<React.SetStateAction<boolean>>;
+	children: ReactNode
+}
+
+const Modal: FC<IModal> = ({ modal, setModal, children }) => {
+	const [localModal, setLocalModal] = useState<typeof modal>(modal);
 
 	useEffect(() => {
 		setLocalModal(modal);

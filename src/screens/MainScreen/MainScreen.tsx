@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import cl from './MainScreen.module.css';
 import AnimatedSymbolsText from '@/components/AnimatedSymbolsText/AnimatedSymbolsText';
 import Particles from '@/components/Particles/Particles';
 import Header from '@/components/Header/Header';
 import MainScreenContext from '../../contexts/MainScreenContext';
 
-const MainScreen = () => {
+const MainScreen: FC = () => {
 	const [mainContext, setMainContext] = useState({
 		particlesConfig: {
 			count: 25,

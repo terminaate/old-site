@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import cl from './Header.module.css';
 import downArrow from '!/down-arrow.png';
 import statsImg from '!/stats.png';
@@ -8,37 +8,36 @@ import githubImg from '!/logos/github.svg';
 import discordImg from '!/logos/discord.svg';
 import settingsImg from '!/settings.svg';
 import SettingsModal from '../SettingsModal/SettingsModal';
-import MainScreenContext from '../../contexts/MainScreenContext';
+// import MainScreenContext from '../../contexts/MainScreenContext';
+import { MovableModalStatement } from '@/components/MovableModal/MovableModal';
 
 const Header = () => {
-	const [header, setHeader] = useState(false);
-	const [statsModal, setStatsModal] = useState('not-exist');
-	const [githubModal, setGithubModal] = useState('not-exist');
+	const [header, setHeader] = useState<boolean>(false);
+	const [statsModal, setStatsModal] = useState<MovableModalStatement>('not-exist');
+	const [githubModal, setGithubModal] = useState<MovableModalStatement>('not-exist');
 	// const [discordNotify, setDiscordNotify] = useState('');
-	const [settingsModal, setSettingsModal] = useState('not-exist');
-	const [mainContext, setMainContext] = useContext(MainScreenContext);
+	const [settingsModal, setSettingsModal] = useState<MovableModalStatement>('not-exist');
+	// const [mainContext, setMainContext] = useContext(MainScreenContext);
 
-	const setModalState = (state, setState) => {
-		if (state !== 'not-exist' && state !== "collapsed") {
-			setState();
+	const setModalState = (state: MovableModalStatement, setState: React.Dispatch<React.SetStateAction<MovableModalStatement>>, value: MovableModalStatement) => {
+		if (state !== 'not-exist' && state !== 'collapsed') {
+			setState(value);
 		}
 	};
 
-	// TODO
-	// Write backend for sending message to me from bot xD
-
 	const copyDiscordTag = () => {
-		navigator.clipboard.writeText('Terminaate#9274');
-		alert('Discord tag copied!');
+		navigator.clipboard.writeText('Terminaate#9274').then(() => {
+			alert('Discord tag copied!');
+		});
 	};
 
 	const inactiveAllModals = () => {
-		setModalState(statsModal, () => setStatsModal('inactive'));
-		setModalState(githubModal, () => setGithubModal('inactive'));
-		setModalState(settingsModal, () => setSettingsModal('inactive'));
+		setModalState(statsModal, setStatsModal, 'inactive');
+		setModalState(githubModal, setGithubModal, 'inactive');
+		setModalState(settingsModal, setSettingsModal, 'inactive');
 	};
 
-	const openModal = (state, setState) => {
+	const openModal = (state: MovableModalStatement, setState: React.Dispatch<React.SetStateAction<MovableModalStatement>>) => {
 		if (state !== 'active') {
 			inactiveAllModals();
 			setState('active');

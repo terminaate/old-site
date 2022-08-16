@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
-import MovableModal from '../MovableModal/MovableModal';
+import React, { FC, useEffect, useState } from 'react';
+import MovableModal, { MovableModalStatement } from '../MovableModal/MovableModal';
 import cl from './StatsModal.module.css';
 
-const StatsModal = ({ modal, setModal }) => {
-	const [stats, setStats] = useState([]);
+interface IStatsModal {
+	modal: MovableModalStatement;
+	setModal: React.Dispatch<React.SetStateAction<MovableModalStatement>>;
+}
+
+const StatsModal: FC<IStatsModal> = ({ modal, setModal }) => {
+	const [stats, setStats] = useState<Array<{ [key: string]: string | boolean }>>([]);
 
 	useEffect(() => {
 
@@ -19,7 +24,7 @@ const StatsModal = ({ modal, setModal }) => {
 			userAgent,
 			webdriver,
 			product
-		} = navigator;
+		} = navigator as Navigator & { buildID: string; oscpu: string };
 
 		setStats([
 			{
@@ -34,7 +39,7 @@ const StatsModal = ({ modal, setModal }) => {
 				'App version': appVersion,
 				'Build ID': buildID,
 				'Is Cookie enabled': cookieEnabled,
-				'Do not track': Boolean(parseInt(doNotTrack)),
+				'Do not track': Boolean(parseInt(doNotTrack as string)),
 				'OS': oscpu,
 				'Platform': platform,
 				'User Agent': userAgent,

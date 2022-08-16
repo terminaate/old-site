@@ -1,18 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.css';
-import classes from '@/hooks/classes';
+import useClasses from '@/hooks/useClasses';
 
-const Particles = ({
-										 backgroundColor = '#0b0b0b',
-										 particlesCount = 100,
-										 particlesSize = Math.random() * 2,
-										 particlesColor = '#fff',
-										 particlesVelocity = 0.4,
-										 className,
-										 height = '100%',
-										 width = '100%'
-									 }) => {
-	const canvasRef = useRef(null);
+interface IParticles {
+	backgroundColor?: string;
+	particlesCount?: number;
+	particlesSize?: number;
+	particlesColor?: string;
+	particlesVelocity?: number;
+	className?: string;
+	height?: string | number;
+	width?: string | number;
+}
+
+const Particles: FC<IParticles> = ({
+																		 backgroundColor = '#0b0b0b',
+																		 particlesCount = 100,
+																		 particlesSize = Math.random() * 2,
+																		 particlesColor = '#fff',
+																		 particlesVelocity = 0.4,
+																		 className = '',
+																		 height = '100%',
+																		 width = '100%'
+																	 }) => {
+	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	const getHeight = () => {
 		if (typeof height === 'number') return height;
@@ -52,13 +63,11 @@ const Particles = ({
 	});
 
 	useEffect(() => {
-		const ctx = canvasRef.current.getContext('2d');
+		const ctx = canvasRef.current!.getContext('2d')!;
 		ctx.canvas.width = localWidth;
 		ctx.canvas.height = localHeight;
-		const particles = [];
-		let animationRequestFrameId;
-
-		init();
+		const particles: any = [];
+		let animationRequestFrameId: number;
 
 		const resizeHandler = () => {
 			setLocalHeight(getHeight());
@@ -67,7 +76,15 @@ const Particles = ({
 
 		addEventListener('resize', resizeHandler);
 
-		function Particle() {
+		function Particle(this: {
+			x: number;
+			y: number;
+			velocityX: number;
+			velocityY: number;
+			position: () => void;
+			reDraw: () => void;
+		}) {
+
 			this.x = Math.random() * ctx.canvas.width;
 			this.y = Math.random() * ctx.canvas.height;
 			this.velocityX = Math.random() * (config.particlesVelocity * 2) - config.particlesVelocity;
@@ -114,10 +131,12 @@ const Particles = ({
 
 		function init() {
 			for (let i = 0; i < config.particlesCount; i++) {
-				particles.push(new Particle);
+				particles.push(new (Particle as any));
 			}
 			loop();
 		}
+
+		init();
 
 		return () => {
 			cancelAnimationFrame(animationRequestFrameId);
@@ -126,7 +145,7 @@ const Particles = ({
 	}, []);
 
 	return (
-		<div style={{ height: localHeight, width: localWidth }} className={classes(cl.particlesContainer, className)}>
+		<div style={{ height: localHeight, width: localWidth }} className={useClasses(cl.particlesContainer, className)}>
 			<canvas ref={canvasRef} height={localHeight} width={localWidth} />
 		</div>
 	);

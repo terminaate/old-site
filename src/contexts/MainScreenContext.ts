@@ -1,6 +1,5 @@
 import { createContext } from 'react';
 
-const MainScreenContext = createContext([{}, () => {
-}]);
+const MainScreenContext = createContext([{}, () => {}]);
 
 export default MainScreenContext;

@@ -1,0 +1,38 @@
+.UIRangeInput[type='range'] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: none;
+    border: 2px solid var(--text-primary);
+    border-radius: 4px;
+    height: 10px;
+}
+
+.UIRangeInput[type='range']::-moz-range-thumb {
+    -webkit-appearance: none !important;
+    background-color: var(--background-primary);
+    border: 2px solid var(--text-primary);
+    height: 15px;
+    width: 15px;
+    transition: .2s;
+    border-radius: 50%;
+}
+
+.UIRangeInput[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background-color: var(--background-primary);
+    border: 2px solid var(--text-primary);
+    height: 15px;
+    width: 15px;
+    transition: .2s;
+    border-radius: 50%;
+}
+
+.UIRangeInput[type='range']:active::-moz-range-thumb {
+    background-color: var(--text-primary);
+    box-shadow: 0 0 20px var(--text-primary);
+}
+
+.UIRangeInput[type='range']:active::-webkit-slider-thumb {
+    background-color: var(--text-primary);
+    box-shadow: 0 0 20px var(--text-primary);
+}

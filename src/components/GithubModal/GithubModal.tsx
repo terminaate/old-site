@@ -1,7 +1,7 @@
-import { memo, useEffect, useState } from 'react';
-import MovableModal from '../MovableModal/MovableModal';
+import React, { FC, useEffect, useState } from 'react';
+import MovableModal, { MovableModalStatement } from '../MovableModal/MovableModal';
 import cl from './GithubModal.module.css';
-import GithubService from '@/services/GithubService';
+import GithubService, { GithubRepoProps, GithubUserProps } from '@/services/GithubService';
 import usersImg from '!/users.png';
 import locationImg from '!/location.png';
 import linkImg from '!/link.png';
@@ -11,20 +11,26 @@ import cssImg from '!/logos/css.svg';
 import javascriptImg from '!/logos/javascript.svg';
 import typescriptImg from '!/logos/typescript.svg';
 import pythonImg from '!/logos/python.svg';
-import classes from '@/hooks/classes';
+import useClasses from '@/hooks/useClasses';
 import AnimatedSymbolsText from '../AnimatedSymbolsText/AnimatedSymbolsText';
+import { Response } from '@/hooks/useFetch';
 
 
-const GithubModal = ({ modal, setModal }) => {
-	const [user, setUser] = useState({});
-	const [repos, setRepos] = useState([]);
+interface IGithubModal {
+	modal: MovableModalStatement;
+	setModal: React.Dispatch<React.SetStateAction<MovableModalStatement>>;
+}
 
-	const setAsyncState = (setState, promise) => {
-		promise.then(r => r.status === 200 ? setState(r.body) : '');
+const GithubModal: FC<IGithubModal> = ({ modal, setModal }) => {
+	const [user, setUser] = useState<GithubUserProps>({} as GithubUserProps);
+	const [repos, setRepos] = useState<GithubRepoProps[]>([]);
+
+	const setAsyncState = (setState: React.Dispatch<React.SetStateAction<any>>, promise: Promise<Response>) => {
+		promise.then((r: Response) => r.status === 200 ? setState(r.body) : '');
 	};
 
-	const getLanguageIcon = (lang) => {
-		const langs = {
+	const getLanguageIcon = (lang: string) => {
+		const langs: { [key: string]: string } = {
 			'JavaScript': javascriptImg,
 			'Python': pythonImg,
 			'HTML': htmlImg,
@@ -39,7 +45,7 @@ const GithubModal = ({ modal, setModal }) => {
 		setAsyncState(setRepos, GithubService.getMyRepos());
 	}, []);
 
-	const getDateAndMonthName = (date) => {
+	const getDateAndMonthName = (date: Date) => {
 		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		return `${date.getDate()} ${months[date.getMonth()]}`;
 	};
@@ -60,11 +66,11 @@ const GithubModal = ({ modal, setModal }) => {
 							<img src={usersImg} alt='' />
 							<span>{user.followers} <span>followers</span></span>
 						</div>
-						<div className={classes(cl.userFollowers, cl.userLocation)}>
+						<div className={useClasses(cl.userFollowers, cl.userLocation)}>
 							<img src={locationImg} alt='' />
 							<span>{user.location}</span>
 						</div>
-						<div className={classes(cl.userFollowers, cl.userLocation)}>
+						<div className={useClasses(cl.userFollowers, cl.userLocation)}>
 							<img src={linkImg} alt='' />
 							<span>{user.blog}</span>
 						</div>
@@ -93,4 +99,4 @@ const GithubModal = ({ modal, setModal }) => {
 	);
 };
 
-export default memo(GithubModal);
+export default GithubModal;

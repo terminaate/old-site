@@ -1,7 +1,13 @@
-import { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import cl from './Notification.module.css';
 
-const Notification = ({ state, setState, timeout = 1500 }) => {
+interface INotification {
+	state: string;
+	setState: React.Dispatch<React.SetStateAction<string>>;
+	timeout?: number;
+}
+
+const Notification: FC<INotification> = ({ state, setState, timeout = 1500 }) => {
 	useEffect(() => {
 		setTimeout(() => setState(''), timeout);
 	}, [state]);
