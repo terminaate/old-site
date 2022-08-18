@@ -1,7 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
-import MovableModal, { MovableModalStatement } from '../MovableModal/MovableModal';
-import cl from './GithubModal.module.css';
 import GithubService, { GithubRepoProps, GithubUserProps } from '@/services/GithubService';
+import cl from './GithubModal.module.css';
+
+// Components
+import AnimatedSymbolsText from '../AnimatedSymbolsText';
+import MovableModal, { MovableModalStatement } from '../MovableModal';
+
+// Hooks
+import { Response } from '@/hooks/useFetch';
+import useClasses from '@/hooks/useClasses';
+
+// Images
 import usersImg from '!/users.png';
 import locationImg from '!/location.png';
 import linkImg from '!/link.png';
@@ -11,9 +20,6 @@ import cssImg from '!/logos/css.svg';
 import javascriptImg from '!/logos/javascript.svg';
 import typescriptImg from '!/logos/typescript.svg';
 import pythonImg from '!/logos/python.svg';
-import useClasses from '@/hooks/useClasses';
-import AnimatedSymbolsText from '../AnimatedSymbolsText/AnimatedSymbolsText';
-import { Response } from '@/hooks/useFetch';
 
 
 interface IGithubModal {

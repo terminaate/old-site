@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import MovableModal, { MovableModalStatement } from '../MovableModal/MovableModal';
+import MovableModal, { MovableModalStatement } from '../MovableModal';
 import cl from './StatsModal.module.css';
 
 interface IStatsModal {

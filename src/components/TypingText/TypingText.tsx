@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 import cl from './TypingText.module.css';
-import AnimatedSymbolsText from '../AnimatedSymbolsText/AnimatedSymbolsText';
+import AnimatedSymbolsText from '../AnimatedSymbolsText';
 
 interface ITypingText {
 	text: string | (string | number)[];
@@ -39,7 +39,7 @@ const TypingText: FC<ITypingText> = ({
 		for (let i in formatedText) {
 			setTimeout(() => {
 				setRenderedWords((words: string[]) => [...words, formatedText[i].text]);
-			}, (formatedText[i].delay ? formatedText[i].delay : defaultDelay) * (i as any));
+			}, (formatedText[i].delay ? formatedText[i].delay : defaultDelay) * Number(i));
 		}
 	}, []);
 

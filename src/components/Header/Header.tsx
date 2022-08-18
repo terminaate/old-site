@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import cl from './Header.module.css';
-import downArrow from '!/down-arrow.png';
-import statsImg from '!/stats.png';
-import StatsModal from '../StatsModal/StatsModal';
-import GithubModal from '../GithubModal/GithubModal';
+
+// Components
+import StatsModal from '../StatsModal';
+import GithubModal from '../GithubModal';
+import SettingsModal from '../SettingsModal';
+import { MovableModalStatement } from '../MovableModal';
+
+// Images
 import githubImg from '!/logos/github.svg';
 import discordImg from '!/logos/discord.svg';
 import settingsImg from '!/settings.svg';
-import SettingsModal from '../SettingsModal/SettingsModal';
-// import MainScreenContext from '../../contexts/MainScreenContext';
-import { MovableModalStatement } from '@/components/MovableModal/MovableModal';
+import downArrow from '!/down-arrow.png';
+import statsImg from '!/stats.png';
 
 const Header = () => {
 	const [header, setHeader] = useState<boolean>(false);

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.css';
 import useClasses from '@/hooks/useClasses';
 
-interface IParticles {
+export interface IParticles {
 	backgroundColor?: string;
 	particlesCount?: number;
 	particlesSize?: number;

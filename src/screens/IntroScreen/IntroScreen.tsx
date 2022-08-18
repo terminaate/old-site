@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import cl from './IntroScreen.module.css';
-import TypingText from '@/components/TypingText/TypingText';
-import Particles from '@/components/Particles/Particles';
+import TypingText from '@/components/TypingText';
+import Particles from '@/components/Particles';
 
 interface IIntroScreen {
 	setIntro: React.Dispatch<React.SetStateAction<boolean>>
@@ -9,15 +9,11 @@ interface IIntroScreen {
 
 const IntroScreen: FC<IIntroScreen> = ({ setIntro }) => {
 	const [introEnded, setIntroEnded] = useState<boolean>(false);
-	const visited = useRef<boolean>(Boolean(localStorage.getItem('visited')));
+	const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
 	const containerRef = useRef<HTMLDivElement>(null);
 	const backgroundRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (!localStorage.getItem('visited')) {
-			localStorage.setItem('visited', 'true');
-		}
-
 		addEventListener('mousemove', onMouseMoveEventHandler);
 
 		return () => removeEventListener('mousemove', onMouseMoveEventHandler);
