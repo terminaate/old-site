@@ -39,11 +39,11 @@ const IntroScreen: FC<IIntroScreen> = ({ setIntro }) => {
 					<TypingText
 						onClick={(e: React.MouseEvent<HTMLElement> & { target: HTMLElement }) => e.target.style.background = 'none'}
 						className={visited.current ? cl.introTypingVisitedText : ''}
-						text={'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy", remember that bitches)'} />
+						text={'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy")'} />
 					<div data-intro={introEnded} onClick={skipButtonClickHandler}
 							 className={cl.introSkipButton}>
 						<span>-</span>
-						<span>{visited.current ? 'skip' : 'shut up 14yo "programmer"'}</span>
+						<span>{visited.current ? 'skip' : 'who.... cares?'}</span>
 					</div>
 				</div>
 			</div>
