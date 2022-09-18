@@ -1,4 +1,4 @@
-import useFetch, { Response } from '../hooks/useFetch';
+import req, { Response } from '../utils/req';
 
 export type GithubUserProps = {
 	avatar_url: string;
@@ -22,11 +22,11 @@ export type GithubRepoProps = {
 
 class GithubService {
 	public static getMe(): Promise<Response<GithubUserProps>> {
-		return useFetch('https://api.github.com/users/terminaate');
+		return req('https://api.github.com/users/terminaate');
 	}
 
 	public static getMyRepos(): Promise<Response<GithubRepoProps>> {
-		return useFetch('https://api.github.com/users/terminaate/repos');
+		return req('https://api.github.com/users/terminaate/repos');
 	}
 }
 

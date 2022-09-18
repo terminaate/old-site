@@ -3,7 +3,7 @@ import cl from './MovableModal.module.css';
 import closeImg from '!/close.png';
 import collapseImg from '!/collapse.png';
 import fullScreenImg from '!/fullscreen.png';
-import useClasses from '@/hooks/useClasses';
+import classnames from '@/utils/classnames';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
 export type MovableModalStatement = 'not-exist' | 'collapsed' | 'active' | 'inactive'
@@ -150,7 +150,7 @@ const MovableModal: FC<IMovableModal> = ({
 						 onClick={e => e.stopPropagation()}
 						 data-modal={localModal}
 						 data-fullscreen={sizes.fullscreen}
-						 className={useClasses(cl.modalContainer, className)}>
+						 className={classnames(cl.modalContainer, className)}>
 					<div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
 						<span className={cl.modalHeaderTitle}>{title}</span>
 						<div className={cl.modalHeaderButtons}>

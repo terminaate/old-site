@@ -1,4 +1,4 @@
-import useClasses from '@/hooks/useClasses';
+import classnames from '@/utils/classnames';
 import cl from './RangeInput.module.css';
 import { FC, InputHTMLAttributes } from 'react';
 
@@ -8,7 +8,7 @@ interface IRangeInput extends InputHTMLAttributes<any> {
 
 const RangeInput: FC<IRangeInput> = ({ className = '', ...props }) => {
 	return (
-		<input className={useClasses(cl.UIRangeInput, className)} type='range' {...props} />
+		<input className={classnames(cl.UIRangeInput, className)} type='range' {...props} />
 	);
 };
 

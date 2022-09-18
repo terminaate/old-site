@@ -20,26 +20,26 @@ const TypingText: FC<ITypingText> = ({
 	const [renderedWords, setRenderedWords] = useState<string[]>([]);
 
 	useEffect(() => {
-		if (typeof text === 'string') {
+		if (!Array.isArray(text)) {
 			text = text.split(' ').map(obj => Boolean(Number(obj)) ? Number(obj) : obj);
 		}
 
-		const formatedText: any[] = [];
+		const formattedText: any[] = [];
 
 		for (let i = 0; i < text.length; i++) {
 			if (typeof text[i] === 'number' && typeof text[i + 1] === 'string') {
-				formatedText.push({ text: text[i + 1], delay: text[i] });
+				formattedText.push({ text: text[i + 1], delay: text[i] });
 			} else if (typeof text[i] === 'string' && typeof text[i - 1] !== 'number') {
-				formatedText.push({ text: text[i] });
+				formattedText.push({ text: text[i] });
 			} else if (typeof text[i] === 'number' && typeof text[i + 1] !== 'string') {
-				formatedText.push({ delay: text[i] });
+				formattedText.push({ delay: text[i] });
 			}
 		}
 
-		for (let i in formatedText) {
+		for (let i in formattedText) {
 			setTimeout(() => {
-				setRenderedWords((words: string[]) => [...words, formatedText[i].text]);
-			}, (formatedText[i].delay ? formatedText[i].delay : defaultDelay) * Number(i));
+				setRenderedWords((words: string[]) => [...words, formattedText[i].text]);
+			}, (formattedText[i].delay ? formattedText[i].delay : defaultDelay) * Number(i));
 		}
 	}, []);
 
@@ -48,7 +48,7 @@ const TypingText: FC<ITypingText> = ({
 			{renderedWords.map((obj, key) => (
 				<>
 					{
-						animatedSymbols ? <AnimatedSymbolsText onClick={onClick} className={className}>{obj}</AnimatedSymbolsText> :
+						animatedSymbols ? <AnimatedSymbolsText key={key} onClick={onClick} className={className}>{obj}</AnimatedSymbolsText> :
 							<span onClick={onClick} className={className} key={key}>{obj}</span>
 					}
 				</>

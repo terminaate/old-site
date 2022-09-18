@@ -10,7 +10,7 @@ const App: FC = () => {
 			{intro && <IntroScreen setIntro={setIntro} />}
 			{!intro && <MainScreen />}
 		</>
-	);
+	)
 };
 
 export default App;

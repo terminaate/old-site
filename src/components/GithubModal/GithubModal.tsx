@@ -6,9 +6,9 @@ import cl from './GithubModal.module.css';
 import AnimatedSymbolsText from '../AnimatedSymbolsText';
 import MovableModal, { MovableModalStatement } from '../MovableModal';
 
-// Hooks
-import { Response } from '@/hooks/useFetch';
-import useClasses from '@/hooks/useClasses';
+// utils
+import { Response } from '@/utils/req';
+import classnames from '@/utils/classnames';
 
 // Images
 import usersImg from '!/users.png';
@@ -72,11 +72,11 @@ const GithubModal: FC<IGithubModal> = ({ modal, setModal }) => {
 							<img src={usersImg} alt='' />
 							<span>{user.followers} <span>followers</span></span>
 						</div>
-						<div className={useClasses(cl.userFollowers, cl.userLocation)}>
+						<div className={classnames(cl.userFollowers, cl.userLocation)}>
 							<img src={locationImg} alt='' />
 							<span>{user.location}</span>
 						</div>
-						<div className={useClasses(cl.userFollowers, cl.userLocation)}>
+						<div className={classnames(cl.userFollowers, cl.userLocation)}>
 							<img src={linkImg} alt='' />
 							<span>{user.blog}</span>
 						</div>
