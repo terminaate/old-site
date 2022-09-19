@@ -19,7 +19,7 @@ const Header = () => {
 	const [statsModal, setStatsModal] = useState<MovableModalStatement>('not-exist');
 	const [githubModal, setGithubModal] = useState<MovableModalStatement>('not-exist');
 	// const [discordNotify, setDiscordNotify] = useState('');
-	const [settingsModal, setSettingsModal] = useState<MovableModalStatement>('not-exist');
+	// const [settingsModal, setSettingsModal] = useState<MovableModalStatement>('not-exist');
 	// const [mainContext, setMainContext] = useContext(MainScreenContext);
 
 	const setModalState = (state: MovableModalStatement, setState: React.Dispatch<React.SetStateAction<MovableModalStatement>>, value: MovableModalStatement) => {
@@ -37,7 +37,7 @@ const Header = () => {
 	const inactiveAllModals = () => {
 		setModalState(statsModal, setStatsModal, 'inactive');
 		setModalState(githubModal, setGithubModal, 'inactive');
-		setModalState(settingsModal, setSettingsModal, 'inactive');
+		// setModalState(settingsModal, setSettingsModal, 'inactive');
 	};
 
 	const openModal = (state: MovableModalStatement, setState: React.Dispatch<React.SetStateAction<MovableModalStatement>>) => {
@@ -71,12 +71,12 @@ const Header = () => {
 							<img src={discordImg} alt='' />
 						</button>
 					</div>
-					<div className={cl.headerButton}>
-						<div data-modal={settingsModal} className={cl.headerLine} />
-						<button onClick={() => openModal(settingsModal, setSettingsModal)}>
-							<img src={settingsImg} alt='' />
-						</button>
-					</div>
+					{/*<div className={cl.headerButton}>*/}
+					{/*	<div data-modal={settingsModal} className={cl.headerLine} />*/}
+					{/*	<button onClick={() => openModal(settingsModal, setSettingsModal)}>*/}
+					{/*		<img src={settingsImg} alt='' />*/}
+					{/*	</button>*/}
+					{/*</div>*/}
 				</div>
 				<button onClick={() => setHeader(!header)} data-header={header} className={cl.triggerHeaderButton}>
 					<img src={downArrow} alt='' />
@@ -85,7 +85,7 @@ const Header = () => {
 			<StatsModal modal={statsModal} setModal={setStatsModal} />
 			<GithubModal modal={githubModal} setModal={setGithubModal} />
 			{/*<Notification state={discordNotify} setState={setDiscordNotify} />*/}
-			<SettingsModal modal={settingsModal} setModal={setSettingsModal} />
+			{/*<SettingsModal modal={settingsModal} setModal={setSettingsModal} />*/}
 		</>
 	);
 };
